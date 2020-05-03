@@ -1,0 +1,30 @@
+﻿@model List<Transit>
+<h1>Was it showing or shoveling?...</h1>
+<hr />
+<form method="post" asp-controller="Questions" asp-action="ShowQ">
+    @{
+        if (Model.Count != 0)
+        {
+            <label for="questions">Question:</label>
+            <br />
+            <input type="text" style="width:500px;" list="questions" id="question" name="question" autocomplete="off" required>
+            <datalist id="questions" >
+                @foreach (Transit item in Model)
+                {
+                    string value = item.Qid + ": " + item.Qtitle;
+                    <option value="@value"></option>
+                }
+            </datalist>
+            <br />
+            <br />
+            <input type="submit" value="Show question" />
+        }
+        else
+        {
+            <p>There is no such a question</p>
+        }
+    }
+</form>
+
+
+

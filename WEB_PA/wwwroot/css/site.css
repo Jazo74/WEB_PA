@@ -1,0 +1,419 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    font-size: 36px !important;
+    font-weight: bold !important;
+    color: #5e86b2 !important;
+    padding-left: 80px;
+}
+
+a.navbar-brand-2 {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    font-size: 30px !important;
+    font-weight: bold !important;
+    color: #5e86b2 !important;
+    padding-left: 80px;
+    /*New*/
+    border: 0;
+    border-radius: 15px;
+    line-height: 2.5;
+    padding: 0 20px;
+    text-shadow: 1px 2px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(210, 0, 0, 1);
+    background-image: linear-gradient(to top left,
+                                rgba(59, 163, 227),
+                                rbga(0,0,0 .2) 30%,
+                                rgb(202, 246, 225));
+    box-shadow: inset 2px 1px 1px rgb(41, 142, 118, 0.6),
+                insert -2px -1px 1px rgb(108, 164, 45, 0.6);
+
+}
+a.navbar-brand-2:hover{
+    background-color: rgb(47, 179, 174);
+}
+    a.navbar-brand-2:active {
+        box-shadow: inset -2px -2px 3px rgb(41, 142, 118, 0.6), 
+                    insert 2px 2px 3px rgb(0, 0, 0, 0.6);
+    }
+
+.styled {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+    background-image: linear-gradient(to top left, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2) 30%, rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6), inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+
+    .styled:hover {
+        background-color: rgba(255, 0, 0, 1);
+    }
+
+    .styled:active {
+        box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6), inset 2px 2px 3px rgba(0, 0, 0, .6);
+    }
+
+/*--------------------PROBA--------------------------*/
+
+/* Provide sufficient contrast against white background */
+
+a {
+    color: burlywood;
+    text-decoration: none !important;
+}
+    a :active {
+        text-emphasis-color: aliceblue !important;
+        color: azure !important;
+        text-decoration: none !important;
+    }
+
+    a :hover {
+        text-emphasis-color: aliceblue !important;
+        color: azure !important;
+        text-decoration: none !important;
+    }
+.inactive-input {
+    background-color: darkgray;
+}
+
+input button {
+    background-color: #c3d8ee;
+    border-radius: 3px;
+}
+
+.input-2digit {
+    width: 3ch;
+    text-align:center;
+}
+.qSearch {
+    white-space: pre;
+}
+.inlinethingy {
+    display: inline-block;
+}
+table {
+    border: 1px solid #846339;
+}
+.tablazat th {
+    color: #684e10;
+    background-color: burlywood;
+    font-size: 18px;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #846339;
+}
+
+.tablazat td {
+    color: burlywood;
+    font-size: 16px;
+    padding: 8px;
+    font-weight: bold;
+    border: 1px solid #846339;
+}
+
+.split {
+    height: 812px;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 84px;
+    bottom: 80px;
+    overflow-x: hidden;
+}
+/* Control the left side */
+.left {
+    left: 0;
+    background-color: #5e86b2;
+    border: 1px solid burlywood;
+}
+
+/* Control the right side */
+.right {
+    right: 0;
+    background-color: #5e86b2;
+    border: 1px solid burlywood;
+}
+
+.vl {
+    border-left: 2px solid burlywood;
+    height: 94%;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+}
+hr {
+    border-top: 1px solid;
+    color: burlywood;
+    margin-bottom: 0;
+    margin-top: 0;
+    justify-content: center !important;
+    text-align: center;
+}
+.line-1{
+    border-top: 2px solid;
+}
+p {
+  color: burlywood;
+  font-size: 18px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+.centerP {
+    color: burlywood;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    text-align:center;
+}
+
+label {
+    color: burlywood;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: burlywood;
+}
+h1 {
+    font-size: 28px;
+}
+.H1center {
+    text-align: center;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+ul {
+    padding-left: 60px;
+    margin: 0;
+}
+li {
+    margin-bottom: 20px;
+    color: burlywood;
+    margin: 0;
+}
+.thickhr {
+    border-top: 3px solid;
+}
+.questions .answers {
+    font-size: 16px !important;
+    background-color: burlywood !important;
+    line-height: 0.7 !important;
+    padding: 1px !important;
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+    margin: 0 !important;
+}
+
+input[type=button], input[type=submit], input[type=reset], button {
+    font-size: 18px;
+    font-weight: bold;
+    background-color: burlywood;
+    border-radius: 6px;
+    border: 1px solid #5e86b2;
+    color: #684e10;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.currentUser {
+    float: right;
+    font-size: 14;
+    font-weight: bold;
+    text-emphasis-color: aliceblue !important;
+    color: azure !important;
+    text-decoration: none !important;
+}
+.addbutton {
+    float: right;
+}
+
+.linkedImage {
+    width: 100% !important;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+}
+img {
+    padding: 10px;
+    width: 95%;
+    height: auto;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.nav-link {
+    font-size: 22px !important;
+    color: burlywood !important;
+    font-weight: bold;
+}
+.centerimg {
+    width: 10%;
+    height: auto;
+    
+}
+.mainpage {
+    align-items: stretch;
+    justify-content: center;
+}
+.biglogo {
+    padding: 10px;
+    width: 500px;
+    height: auto;
+    display: block;
+}
+.theeye {
+    margin-top: 200px;
+    width: 7%;
+    height: auto;
+    display: block;
+    float: right;
+}
+
+    
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.bigcenter {
+    font-size: 5em;
+    font-family: 'Merriweather', serif;
+    text-align: center;
+}
+.border-top {
+    border-top: 4px solid burlywood !important;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,88,121,1) 62%, rgba(33,96,129,1) 100%);
+    border-bottom: 5px solid burlywood !important;
+}
+.kozepre {
+    width: 100%;
+    height: 500px;
+    }
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,88,121,1) 62%, rgba(33,96,129,1) 100%);
+    /*background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,88,121,1) 39%, rgba(85,160,189,1) 100%);
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,88,121,1) 35%, rgba(0,212,255,1) 100%);*/
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+.sp-body {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    height: 1500px;
+    width: auto;
+    grid-template-areas: "header header"
+                         "center right"
+                         "footer footer";
+    grid-template-columns: auto 200px;
+    grid-template-rows: 60px auto 50px;
+    grid-gap: 5px;
+}
+.sp-header {
+    margin: 0;
+    padding: 0;
+    grid-area: header;
+    background-color: burlywood;
+    justify-items: stretch;
+    justify-content: stretch;
+}
+.sp-left {
+    margin: 0;
+    padding: 0;
+    grid-area: left;
+    background-color: cornsilk;
+}
+.sp-center {
+    margin: 0;
+    padding: 0;
+    grid-area: center;
+    background-color: darkkhaki;
+    justify-items: center;
+}
+.sp-footer {
+    margin: 0;
+    padding: 0;
+    grid-area: footer;
+    background-color: slategray;
+}
+.sp-navbar {
+    display: flex;
+}
+.sp-navbar li {
+    flex: 3;
+    align-self: center;
+}
+
+/* ---------------------------------------------------  */
+
+.div2{
+
+}
+
+
+.table2 {
+    width: auto;
+}
+
+.tr2:nth-child(){
+    background-color:burlywood;
+}

@@ -1,0 +1,91 @@
+﻿@model List<Transit>
+@{
+    string username = "unknown";
+    if (ViewData["currentUser"].ToString() != "")
+    {
+        username = ViewData["currentUser"].ToString();
+    }
+    else
+    {
+        username = "unknown user";
+    }
+}
+<p class="currentUser">Welcome @username !</p>
+<h2>Questions</h2>
+<hr class="thickhr" />
+<br />
+<form method="post" asp-controller="Questions" asp-action="ShowQWithSelect">
+    <input type="text" id="wordSearch" name="wordToSearch" size="30" style="margin-bottom: 7px;" />
+    <label for="fromTime"> date: </label>
+    <input type="text" id="fromTime" name="fromTimeToSearch" size="7" maxlength="10" value="1900.01.01" />
+    <label for="toTime"> - </label>
+    <input type="text" id="toTimeSearch" name="toTimeToSearch" size="7" maxlength="10" value="2100.01.01" />
+    <label for="voteSearch"> min. votes: </label>
+    <input type="text" id="voteSearch" name="fromVoteSearch" size="3" value="0" />
+    <input type="submit" value="search" />
+</form>
+<br />
+<hr />
+<br />
+<form method="post" asp-controller="Questions" asp-action="ShowQLatestSelect">
+    <input type="submit" value="show" />
+    <label for="lastLimit">the latest </label>
+    <input class="input-2digit" type="text" id="lastLimit" name="latestX" value="5" />
+
+</form>
+<br>
+<button class="addbutton" onclick="document.getElementById('newquestion').scrollIntoView();">Add new question</button>
+@{ if (Model.Count != 0)
+    {
+        <table class="tablazat">
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Votes</th>
+                <th>Views</th>
+                <th>Created</th>
+            </tr>
+            @{
+                foreach (Transit item in Model)
+                {
+                    <tr>
+                        <td>@item.Qid</td>
+                        <td><a asp-controller="Questions" asp-action="ShowQe" asp-route-qid=@(item.Qid)>@item.Qtitle</a></td>
+                        <td>@item.Qvote</td>
+                        <td>@item.Qview</td>
+                        <td>@item.QsubmissionTime</td>
+                    </tr>
+                }
+            }
+        </table>
+    }
+    else
+    {
+        <p>There are no questions!</p>
+    }
+    <br />
+    <div id="newquestion">
+        <h3>Add a new question</h3>
+        <hr class="thickhr" />
+        <br />
+        <form method="post" asp-controller="Questions" asp-action="AddQuestion">
+            <label for="addNewTitle">Title:</label>
+            <br />
+            <textarea id="addNewTitle" name="title" rows="1" cols="82" maxlength="50" required></textarea>
+            <br />
+            <label for="addNewQuestion">Question:</label>
+            <br />
+            <textarea id="addNewQuestion" name="text" rows="10" cols="82" required></textarea>
+            <br />
+            <label for="image">Link an image:</label>
+            <br />
+            <textarea id="image" name="image" rows="1" cols="82"></textarea>
+            <br />
+            <input type="hidden" name="currentUser" value="@ViewData["currentUser"]" />
+            <input type="submit" value="Add question" />
+        </form>
+    </div>
+}
+
+
+
