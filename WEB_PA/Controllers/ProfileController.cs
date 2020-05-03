@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using AskMate2.Domain;
+using WEB_PA.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace AskMate2.Controllers
+namespace WEB_PA.Controllers
 {
     [Authorize]
     public class ProfileController : Controller

@@ -1,12 +1,11 @@
-﻿using AskMate2.Models;
+﻿using WEB_PA.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace AskMate2.Domain
+namespace WEB_PA.Domain
 {
     public interface IUserService
     {

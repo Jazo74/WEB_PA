@@ -1,5 +1,5 @@
-﻿using AskMate2.Domain;
-using AskMate2.Models;
+﻿using WEB_PA.Domain;
+using WEB_PA.Models;
 using Newtonsoft.Json.Schema;
 using Npgsql;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AskMate2.Services
+namespace WEB_PA.Services
 {
     public class UserHandler : IUserService
     {

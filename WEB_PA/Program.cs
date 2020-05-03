@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using AskMate2.Domain;
-using AskMate2.Models;
+using WEB_PA.Domain;
+using WEB_PA.Models;
 
-namespace AskMate2
+namespace WEB_PA
 {
     public class Program
     {

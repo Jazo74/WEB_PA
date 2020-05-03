@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AskMate2;
-using AskMate2.Domain;
-using AskMate2.Models;
+using WEB_PA;
+using WEB_PA.Domain;
+using WEB_PA.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
-namespace AskMate2.Controllers
+namespace WEB_PA.Controllers
 {
     [Microsoft.AspNetCore.Components.Route("")]
     public class QuestionsController : Controller

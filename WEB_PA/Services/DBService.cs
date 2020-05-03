@@ -3,10 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AskMate2;
-using AskMate2.Models;
 
-namespace AskMate2.Domain
+namespace WEB_PA.Domain
 {
     public class DBService : IDataService
     {

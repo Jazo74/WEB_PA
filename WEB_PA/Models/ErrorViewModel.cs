@@ -1,6 +1,6 @@
 using System;
 
-namespace AskMate2.Models
+namespace WEB_PA.Models
 {
     public class ErrorViewModel
     {
