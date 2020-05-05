@@ -12,9 +12,9 @@ namespace WEB_PA.Services
     public class UserHandler : IUserService
     {
         //Missing available users
-        private List<User> _users = new List<User>();
+        private List<User> users = new List<User>();
 
-        private List<UserTransit> _users2 = new List<UserTransit>();
+        private List<UserTransit> users2 = new List<UserTransit>();
 
 
         // gets all users from the DataBase
@@ -24,7 +24,7 @@ namespace WEB_PA.Services
             using (var conn = new NpgsqlConnection(Program.ConnectionString))
             {
                 conn.Open();
-                using (var cmd = new NpgsqlCommand("SELECT * FROM \"user\"", conn))
+                using (var cmd = new NpgsqlCommand("SELECT * FROM users", conn))
                 {
                     List<User> userList = new List<User>();
                     string id = "";
@@ -37,12 +37,11 @@ namespace WEB_PA.Services
                     {
                         id = reader["user_id"].ToString();
                         email = reader["email"].ToString();
-                        password = reader["password"].ToString();
-                        reputation = Convert.ToInt32(reader["reputation"]);
-                        _users.Add(new User(id, email, password, reputation));
+                        password = reader["pw"].ToString();
+                        users.Add(new User(id, email, password, reputation));
                     }
 
-                    return _users;
+                    return users;
                 }
             }
         }
@@ -50,13 +49,13 @@ namespace WEB_PA.Services
 
         public User GetUserByID(string id)
         {
-            return _users.FirstOrDefault(u => u.Id == id);
+            return users.FirstOrDefault(u => u.Id == id);
 
         }
 
         public User GetUserByEmail(string email)
         {
-            return _users.FirstOrDefault(u => u.Email == email);
+            return users.FirstOrDefault(u => u.Email == email);
         }
 
         // 
@@ -74,13 +73,6 @@ namespace WEB_PA.Services
             }
             return user;
         }
-
-
-
-
-
-
-
 
         //DataBase 
 
@@ -106,45 +98,43 @@ namespace WEB_PA.Services
             using (var conn = new NpgsqlConnection(Program.ConnectionString))
             {
                 conn.Open();
-                using (var cmd = new NpgsqlCommand("INSERT INTO \"user\"(user_id, email, \"password\", reputation, registration_date) VALUES(@user_id, @email, @password, @reputation, @registration_date)", conn))
+                using (var cmd = new NpgsqlCommand("INSERT INTO users (user_id, email, pw) VALUES(@user_id, @email, @password)", conn))
                 {
                     cmd.Parameters.AddWithValue("@user_id", user_id);
                     cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@password", password);
-                    cmd.Parameters.AddWithValue("@reputation", reputation);
-                    cmd.Parameters.AddWithValue("@registration_date", registration_date);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public List<UserTransit> GetAllUsersModel()
-        {
-            DateTime registrationDate = DateTime.Now;
-            using (var conn = new NpgsqlConnection(Program.ConnectionString))
-            {
-                conn.Open();
-                using (var cmd = new NpgsqlCommand("SELECT * FROM \"user\"", conn))
-                {
-                    string id = "";
-                    string email = "";
-                    string password = "";
-                    int reputation = 0;
+        //public List<UserTransit> GetAllUsersModel()
+        //{
+        //    DateTime registrationDate = DateTime.Now;
+        //    using (var conn = new NpgsqlConnection(Program.ConnectionString))
+        //    {
+        //        conn.Open();
+        //        using (var cmd = new NpgsqlCommand("SELECT * FROM \"user\"", conn))
+        //        {
+        //            string id = "";
+        //            string email = "";
+        //            string password = "";
+        //            int reputation = 0;
 
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        id = reader["user_id"].ToString();
-                        email = reader["email"].ToString();
-                        password = reader["password"].ToString();
-                        reputation = Convert.ToInt32(reader["reputation"]);
-                        registrationDate = Convert.ToDateTime(reader["registration_date"]);
-                        _users2.Add(new UserTransit(id, email, password, reputation, registrationDate));
-                    }
-                    return _users2;
-                }
-            }
-        }
+        //            var reader = cmd.ExecuteReader();
+        //            while (reader.Read())
+        //            {
+        //                id = reader["user_id"].ToString();
+        //                email = reader["email"].ToString();
+        //                password = reader["password"].ToString();
+        //                reputation = Convert.ToInt32(reader["reputation"]);
+        //                registrationDate = Convert.ToDateTime(reader["registration_date"]);
+        //                _users2.Add(new UserTransit(id, email, password, reputation, registrationDate));
+        //            }
+        //            return _users2;
+        //        }
+        //    }
+        //}
 
     }
 }

@@ -11,7 +11,6 @@ namespace WEB_PA.Domain
     {
 
         public List<User> GetAllUsers();
-        public List<UserTransit> GetAllUsersModel();
 
         public User GetUserByID(string id);
 

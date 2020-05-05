@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WEB_PA;
 using WEB_PA.Domain;
 using WEB_PA.Models;
 using WEB_PA.Services;
@@ -18,7 +19,6 @@ namespace AskMate2.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly ILogger<AccountController> _logger;
         private readonly IUserService _userService = new UserHandler();
         
         [HttpGet] //MISSING login page
@@ -92,8 +92,6 @@ namespace AskMate2.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
-
         [HttpPost]
         public IActionResult Register([FromForm] string user_id, [FromForm] string email, [FromForm] string password)
         {
@@ -103,19 +101,6 @@ namespace AskMate2.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
-
-        [Authorize]
-        [HttpGet]
-        public IActionResult AllUsers()
-        {
-            List<UserTransit> allUser = _userService.GetAllUsersModel();
-            
-            return View("AllUsers", allUser);
-        }
-
-
-
 
     }
 }

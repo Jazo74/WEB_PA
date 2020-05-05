@@ -1,4 +1,12 @@
 {
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:52097/",
+      "sslPort": 44325
+    }
+  },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
@@ -11,11 +19,11 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "DB_NAME": "Orienteering",
-        "DB_HOST": "localhost",
         "DB_USER": "postgres",
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "DB_PASS": "admin"
+        "DB_NAME": "Orienteering",
+        "DB_PASS": "admin",
+        "DB_HOST": "localhost",
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:5000"
     }

@@ -11,11 +11,7 @@ namespace WEB_PA.Domain
 
         string GetUserId(string email);
 
-        void AccepAnswer(string answerId);
 
-        string GetUserFromQuestion(string questionId);
-
-        string GetUserFromAnswer(string answerId);
 
     }
 }
