@@ -3,8 +3,9 @@
     ViewData["Title"] = "Login";
 }
 
-    <div>
-        <h3>Login</h3>
+<div class="Login-grid">
+    <div class="Login-left">
+        <h3 class="center-title">Login</h3>
         <br />
         <form method="post">
             <label>Email</label>
@@ -16,28 +17,27 @@
             <br />
             <input type="submit" value="Login" /> <!--Missing Attribute-->
         </form>
-        <br />
-        <br />
-        <h3>OR</h3>
+        
     </div>
-<hr />
-<br />
-<br />
-<div>
-    <h3 >Register</h3>
-    <br />
-    <form method="post" asp-controller="Account" asp-action="Register">
-        <label>UserName</label>
-        <input type="text" name="user_id" autocomplete="off" />
+    <div class="Login-center">
+        <h3 class="center-title">OR</h3>
+    </div>
+    <div class="Login-right">
+        <h3 class="center-title">Register</h3>
         <br />
-        <label>Email</label>
-        <input type="text" name="email" autocomplete="off" />
-        <br />
-        <label>Password</label>
-        <input type="password" name="password" autocomplete="off" />
-        <br />
-        <br />
-        <input type="submit" value="Register" />
-    </form>
+        <form method="post" asp-controller="Account" asp-action="Register">
+            <label>UserName</label>
+            <input type="text" name="user_id" autocomplete="off" />
+            <br />
+            <label>Email</label>
+            <input type="text" name="email" autocomplete="off" />
+            <br />
+            <label>Password</label>
+            <input type="password" name="password" autocomplete="off" />
+            <br />
+            <br />
+            <input type="submit" value="Register" />
+        </form>
+    </div>
 </div>
 

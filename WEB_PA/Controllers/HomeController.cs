@@ -15,12 +15,6 @@ namespace WEB_PA.Controllers
     public class HomeController : Controller
     {
         IDataService ds = new DBService();
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
 
         public IActionResult Index()
         {
