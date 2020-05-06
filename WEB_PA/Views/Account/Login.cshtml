@@ -6,37 +6,50 @@
 <div class="Login-grid">
     <div class="Login-left">
         <h3 class="center-title">Login</h3>
-        <br />
         <form method="post">
-            <label>Email</label>
-            <input type="text" name="email" />
+            <label class="Login-label">Email</label>
             <br />
-            <label>Password</label>
-            <input type="password" name="password" autocomplete="off" />
+            <input class="input-text" type="text" name="email" />
             <br />
-            <br />
-            <input type="submit" value="Login" /> <!--Missing Attribute-->
+            <label class="Login-label">
+                Password</labelclass="Login-label">
+                <br />
+                <input class="input-text" type="password" name="password" autocomplete="off" />
+                <br />
+                <br />
+                <input class="button" type="submit" value="Login" />
         </form>
         
     </div>
     <div class="Login-center">
-        <h3 class="center-title">OR</h3>
+        <br />
+        <h3 class="center-title" id="Login-center">OR</h3>
     </div>
     <div class="Login-right">
         <h3 class="center-title">Register</h3>
-        <br />
         <form method="post" asp-controller="Account" asp-action="Register">
-            <label>UserName</label>
-            <input type="text" name="user_id" autocomplete="off" />
+            <label class="Login-label">Nick name</label>
             <br />
-            <label>Email</label>
-            <input type="text" name="email" autocomplete="off" />
+            <input class="input-text" type="text" name="user_id" required/>
             <br />
-            <label>Password</label>
-            <input type="password" name="password" autocomplete="off" />
+            <label class="Login-label">Email</label>
+            <br />
+            <input class="input-text" type="text" name="email" required/>
+            <br />
+            <label class="Login-label">Password</label>
+            <br />
+            <input class="input-text" type="password" name="password" required/>
+            <br />
+            <label class="Login-label">First name</label>
+            <br />
+            <input class="input-text" type="password" name="firstName"/>
+            <br />
+            <label class="Login-label">Family Name</label>
+            <br />
+            <input class="input-text" type="password" name="lastName"/>
             <br />
             <br />
-            <input type="submit" value="Register" />
+            <input class="button" type="submit" value="Register" />
         </form>
     </div>
 </div>

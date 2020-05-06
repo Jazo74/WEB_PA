@@ -34,14 +34,6 @@ namespace WEB_PA.Controllers
             return View();
         }
 
-        [Authorize]
-        public IActionResult Theeye()
-        {
-            string email = HttpContext.User.FindFirstValue(ClaimTypes.Email);
-            ViewData.Add("email", email);
-            return View("devspage");
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

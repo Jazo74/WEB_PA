@@ -5,22 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 </head>
 <body class="Main-body">
     <div class="Main-header">
-        <div>
-            <a asp-area="" asp-controller="Home" asp-action="Index">Tereplépcső</a> @*Change*@
+        <div class="Nav-title">
+            <a asp-area="" asp-controller="Home" asp-action="Index">ORIENTeering Express</a> @*Change*@
         </div>
-        <div>
-            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        <div class="Nav-logo">
+            <img class="centerimg" src="~/Images/logo.png" alt="animated question mark">
         </div>
-        <div>
+        <div class="Nav-login">
             @{
-                if (ViewData["currentUser"] != null && ViewData["currentUser"].Equals("Admin"))
-                {
-                    <a asp-area="" asp-controller="Account" asp-action="AllUsers">AllUsers</a>
-
-                }
                 if (ViewData["currentUser"] == null || ViewData["currentUser"].Equals(""))
                 {
                     <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
@@ -31,26 +27,23 @@
                 }
             }
         </div>
-        <div>
-            <img class="centerimg" src="~/north-arrow.jpg" alt="animated question mark">
-        </div>
-        <div>
+        <div class="Nav-user">
             @{
                 string username = "unknown";
-                if (ViewData["currentUser"].ToString() != "")
+                if (ViewData["currentUser"] != null && ViewData["currentUser"] != "")
                 {
                     username = ViewData["currentUser"].ToString();
                 }
                 else
                 {
-                    username = "stranger";
+                    username = "wanderer";
                 }
                 <p class="currentUser">Welcome @username !</p>
-                if (username != "stranger")
+                if (username != "wanderer")
                 {
                     <a asp-controller="User" asp-action="user">Your activity -></a>
                 }
-                }
+            }
         </div>
     </div>
     <div class="container">

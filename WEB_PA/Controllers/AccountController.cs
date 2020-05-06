@@ -20,10 +20,14 @@ namespace AskMate2.Controllers
     public class AccountController : Controller
     {
         private readonly IUserService _userService = new UserHandler();
-        
+        IDataService ds = new DBService();
+
         [HttpGet] //MISSING login page
         public IActionResult Login()
         {
+            string currentUser = "";
+            currentUser = ds.GetUserId(HttpContext.User.FindFirstValue(ClaimTypes.Email));
+            ViewData.Add("currentUser", currentUser);
             return View("Login");
         }
         
