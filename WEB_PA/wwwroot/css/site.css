@@ -1,7 +1,19 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+p {
+    font-size: 26px;
+    text-align:left;
+}
 
+hr {
+    width: 90%;
+    border: 1px solid #b0f541 !important;
+}
+
+tbody {
+    text-align: left;
+}
 .Main-body {
     padding: 0;
     margin: 0;
@@ -86,6 +98,8 @@ for details on configuring this project to bundle and minify static web assets. 
     background: rgb(48,130,13);
     background: linear-gradient(90deg, rgba(48,130,13,1) 0%, rgba(33,73,4,1) 100%);
     border-top: 5px solid #b0f541;
+    color: #77fd32;
+    font-size: 20px;
 }
 
 .index {
@@ -206,3 +220,39 @@ html {
     height: 25px;
     color: darkgreen;
 }
+
+.Backlog {
+    margin: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    color: #fbfd79;
+}
+
+.Backlog-title {
+    text-align: center;
+}
+
+.Backlog-dbER {
+    margin-left: 10px;
+    text-align: center;
+}
+
+.database-diagram {
+    width: 90%;
+    height: auto;
+}
+
+.Backlog-table {
+    width: 90%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.Backlog-table td, .Backlog-table th {
+    border: 1px solid #77fd32;
+    padding: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 26px;
+}
+

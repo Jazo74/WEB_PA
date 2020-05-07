@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body class="Main-body">
     <div class="Main-header">
@@ -30,7 +31,7 @@
         <div class="Nav-user">
             @{
                 string username = "unknown";
-                if (ViewData["currentUser"] != null && ViewData["currentUser"] != "")
+                if (ViewData["currentUser"] != null && ViewData["currentUser"].ToString() != "")
                 {
                     username = ViewData["currentUser"].ToString();
                 }
@@ -39,10 +40,10 @@
                     username = "wanderer";
                 }
                 <p class="currentUser">Welcome @username !</p>
-                @*if (username != "wanderer")
+                if (username != "wanderer")
                 {
                     <a asp-controller="User" asp-action="user">Your activity -></a>
-                }*@
+                }
             }
         </div>
     </div>
@@ -53,7 +54,7 @@
     </div>
     <div class="Main-footer">
         <div>
-            &copy; 2020 - Tájfutás - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> - <a asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+            &copy; 2020 - <a class="Backlog-link" asp-controller="Backlog" asp-action="Backlog">Backlog</a> - <a asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
         </div>
     </div>
     @RenderSection("Scripts", required: false)

@@ -26,11 +26,17 @@ namespace WEB_PA.Controllers
 
         public IActionResult Privacy()
         {
+            string currentUser = "";
+            currentUser = ds.GetNickname(HttpContext.User.FindFirstValue(ClaimTypes.Email));
+            ViewData.Add("currentUser", currentUser);
             return View();
         }
 
         public IActionResult AboutUs()
         {
+            string currentUser = "";
+            currentUser = ds.GetNickname(HttpContext.User.FindFirstValue(ClaimTypes.Email));
+            ViewData.Add("currentUser", currentUser);
             return View();
         }
 
