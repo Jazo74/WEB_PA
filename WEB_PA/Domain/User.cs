@@ -6,24 +6,19 @@ namespace WEB_PA.Domain
 {
     public class User
     {
-
-        public string Id { get; set; }
+        public string NickName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int Reputation { get; set; }
-        public DateTime RegistrationDate { get; set; }
+        public string FirstName { get; set; }
+        public string FamilyName { get; set; }
 
-        public User(string id, string email, string password, int reputation)
+        public User(string nickName, string email, string password, string firstName, string familyName)
         {
-            Id = id;
+            NickName = nickName;
             Email = email;
             Password = password;
-            Reputation = reputation;
-        }
-
-        public User(string id, string email, string password, int reputation, DateTime registrationDate) : this(id, email, password, reputation)
-        {
-            RegistrationDate = registrationDate;
+            FirstName = firstName;
+            FamilyName = familyName;
         }
     }
 }

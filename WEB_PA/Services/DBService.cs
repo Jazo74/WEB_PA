@@ -8,7 +8,7 @@ namespace WEB_PA.Domain
 {
     public class DBService : IDataService
     {
-        public string GetUserId(string email)
+        public string GetNickname(string email)
         {
             using (var conn = new NpgsqlConnection(Program.ConnectionString))
             {
@@ -18,14 +18,14 @@ namespace WEB_PA.Domain
                     email = "";
                 }
                 conn.Open();
-                using (var cmd = new NpgsqlCommand("SELECT user_id FROM users " +
-                    "WHERE email = @email", conn))
+                using (var cmd = new NpgsqlCommand("SELECT nickname FROM users " +
+                    "WHERE user_email = @email", conn))
                 {
                     cmd.Parameters.AddWithValue("email", email);
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        userId = reader["user_id"].ToString();
+                        userId = reader["nickname"].ToString();
                     }
 
                     return userId;

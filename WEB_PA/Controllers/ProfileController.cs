@@ -1,40 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using WEB_PA.Domain;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Security.Claims;
+//using System.Threading.Tasks;
+//using WEB_PA.Domain;
+//using Microsoft.AspNetCore.Authorization;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.Extensions.Logging;
 
-namespace WEB_PA.Controllers
-{
-    [Authorize]
-    public class ProfileController : Controller
-    {
+//namespace WEB_PA.Controllers
+//{
+//    [Authorize]
+//    public class ProfileController : Controller
+//    {
 
-        private readonly ILogger<ProfileController> _logger;
-        private readonly IUserService _userService;
+//        private readonly ILogger<ProfileController> _logger;
+//        private readonly IUserService _userService;
 
-        public ProfileController(IUserService userService)
-        {
-            //ILogger<ProfileController> logger MISSING form parameters
-            _userService = userService;
-        }
+//        public ProfileController(IUserService userService)
+//        {
+//            //ILogger<ProfileController> logger MISSING form parameters
+//            _userService = userService;
+//        }
 
 
-        public IActionResult Index()
-        {
-            var email = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Email).Value;
-            User user = _userService.GetUserByEmail(email);
+//        public IActionResult Index()
+//        {
+//            var email = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Email).Value;
+//            User user = _userService.GetUserByEmail(email);
 
-            return View(new 
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Password = user.Password
-            });
-        }
-    }
-}
+//            return View(new 
+//            {
+//                Id = user.Id,
+//                Email = user.Email,
+//                Password = user.Password
+//            });
+//        }
+//    }
+//}

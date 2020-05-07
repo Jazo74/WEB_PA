@@ -19,14 +19,14 @@ namespace AskMate2.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUserService _userService = new UserHandler();
+        private readonly IUserService userService = new UserHandler();
         IDataService ds = new DBService();
 
-        [HttpGet] //MISSING login page
+        [HttpGet] 
         public IActionResult Login()
         {
             string currentUser = "";
-            currentUser = ds.GetUserId(HttpContext.User.FindFirstValue(ClaimTypes.Email));
+            currentUser = ds.GetNickname(HttpContext.User.FindFirstValue(ClaimTypes.Email));
             ViewData.Add("currentUser", currentUser);
             return View("Login");
         }
@@ -35,17 +35,17 @@ namespace AskMate2.Controllers
         [HttpPost]
         public async Task<ActionResult> Login([FromForm] string email, [FromForm] string password)
         {
-            List<User> allUsers = _userService.GetAllUsers();
+            //List<User> allUsers = userService.GetAllUsers();
 
-            User user = _userService.Login(email, password);
+            string Password = userService.GetPasswordByEmail(email);
             
-            if (user == null)
+            if (Password == null || Password != password)
             {
                 return RedirectToAction("Login", "Account");
             }
 
 
-            var claims = new List<Claim> { new Claim(ClaimTypes.Email, user.Email) };
+            var claims = new List<Claim> { new Claim(ClaimTypes.Email, email) };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -97,11 +97,10 @@ namespace AskMate2.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register([FromForm] string user_id, [FromForm] string email, [FromForm] string password)
+        public IActionResult Register([FromForm] string nickName, [FromForm] string email, [FromForm] string password, [FromForm] string firstName, [FromForm] string familyName)
         {
-
-
-            _userService.RegisterUser(user_id, email, password);
+            User user = new User(nickName, email, password, firstName, familyName);
+            userService.RegisterUser(user);
 
             return RedirectToAction("Index", "Home");
         }

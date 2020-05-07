@@ -27,18 +27,22 @@ namespace WEB_PA.Services
                 using (var cmd = new NpgsqlCommand("SELECT * FROM users", conn))
                 {
                     List<User> userList = new List<User>();
-                    string id = "";
+                    string nickName = "";
                     string email = "";
                     string password = "";
-                    int reputation = 0;
+                    string firstName = "";
+                    string familyName = "";
 
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        id = reader["user_id"].ToString();
-                        email = reader["email"].ToString();
+                        nickName = reader["nickname"].ToString();
+                        email = reader["user_email"].ToString();
                         password = reader["pw"].ToString();
-                        users.Add(new User(id, email, password, reputation));
+                        firstName = reader["first_name"].ToString();
+                        familyName = reader["family_name"].ToString();
+
+                        users.Add(new User(nickName, email, password, firstName, familyName));
                     }
 
                     return users;
@@ -47,34 +51,49 @@ namespace WEB_PA.Services
         }
 
 
-        public User GetUserByID(string id)
-        {
-            return users.FirstOrDefault(u => u.Id == id);
+        //public User GetUserByEmail(string email)
+        //{
+        //    return users.FirstOrDefault(u => u.Email == email);
+        //}
 
-        }
 
-        public User GetUserByEmail(string email)
-        {
-            return users.FirstOrDefault(u => u.Email == email);
-        }
+        //public User Login(string email, string password)
+        //{
 
-        // 
-        public User Login(string email, string password)
-        {
-
-            var user = GetUserByEmail(email);
-            if (user == null)
-            {
-                return null;
-            }
-            if (user.Password != password)
-            {
-                return null;
-            }
-            return user;
-        }
+        //    var user = GetUserByEmail(email);
+        //    if (user == null)
+        //    {
+        //        return null;
+        //    }
+        //    if (user.Password != password)
+        //    {
+        //        return null;
+        //    }
+        //    return user;
+        //}
 
         //DataBase 
+
+
+        public string GetPasswordByEmail(string email)
+        {
+            using (var conn = new NpgsqlConnection(Program.ConnectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand("SELECT pw FROM users WHERE user_email = @email", conn))
+                {
+                    List<User> userList = new List<User>();
+                    string password = "";
+                    cmd.Parameters.AddWithValue("email", email);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        password = reader["pw"].ToString();
+                    }
+                    return password;
+                }
+            }
+        }
 
         public void AddUser(string email, string password)
         {
@@ -90,19 +109,20 @@ namespace WEB_PA.Services
             }
         }
 
-        public void RegisterUser(string user_id, string email, string password)
+        public void RegisterUser(User user)
         {
             DateTime registration_date = DateTime.Now;
-            int reputation = 0;
 
             using (var conn = new NpgsqlConnection(Program.ConnectionString))
             {
                 conn.Open();
-                using (var cmd = new NpgsqlCommand("INSERT INTO users (user_id, email, pw) VALUES(@user_id, @email, @password)", conn))
+                using (var cmd = new NpgsqlCommand("INSERT INTO users (nickname, user_email, pw, first_name, family_name) VALUES(@nickName, @email, @password, @firstName, @familyName)", conn))
                 {
-                    cmd.Parameters.AddWithValue("@user_id", user_id);
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@nickName", user.NickName);
+                    cmd.Parameters.AddWithValue("@email", user.Email);
+                    cmd.Parameters.AddWithValue("@password", user.Password);
+                    cmd.Parameters.AddWithValue("@firstName", user.FirstName);
+                    cmd.Parameters.AddWithValue("@familyName", user.FamilyName);
                     cmd.ExecuteNonQuery();
                 }
             }

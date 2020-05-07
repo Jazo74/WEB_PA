@@ -12,15 +12,17 @@ namespace WEB_PA.Domain
 
         public List<User> GetAllUsers();
 
-        public User GetUserByID(string id);
+        //public User GetUserByID(int id);
 
-        public User GetUserByEmail(string email);
+        //public User GetUserByEmail(string email);
 
-        public User Login(string email, string password);
+        public string GetPasswordByEmail(string email);
+
+        //public User Login(string email, string password);
 
         void AddUser(string email, string password);
 
-        void RegisterUser(string user_id, string email, string password);
+        void RegisterUser(User user);
 
     }
 }

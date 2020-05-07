@@ -19,7 +19,7 @@ namespace WEB_PA.Controllers
         public IActionResult Index()
         {
             string currentUser = "";
-            currentUser = ds.GetUserId(HttpContext.User.FindFirstValue(ClaimTypes.Email));
+            currentUser = ds.GetNickname(HttpContext.User.FindFirstValue(ClaimTypes.Email));
             ViewData.Add("currentUser", currentUser);
             return View();
         }

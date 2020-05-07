@@ -9,9 +9,7 @@ namespace WEB_PA.Domain
     {
         // users
 
-        string GetUserId(string email);
-
-
+        string GetNickname(string email);
 
     }
 }
