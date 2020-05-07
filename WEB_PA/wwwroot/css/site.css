@@ -17,10 +17,10 @@ tbody {
 .Main-body {
     padding: 0;
     margin: 0;
-    height: 980px;
+    height: 1083px;
     display: grid;
     grid-template-areas: "header" "view" "footer";
-    grid-template-rows: 100px auto 80px;
+    grid-template-rows: 110px auto 80px;
     grid-gap: 0;
        
 }
@@ -43,7 +43,7 @@ tbody {
 .Nav-title {
     flex-grow: 1;
     flex-basis: 40%;
-    text-align: center;
+    text-align: left;
     line-height: 24px;
     font-size: 56px;
     align-items: center;
@@ -95,8 +95,10 @@ tbody {
 
 .Main-footer {
     grid-area: footer;
-    background: rgb(48,130,13);
-    background: linear-gradient(90deg, rgba(48,130,13,1) 0%, rgba(33,73,4,1) 100%);
+    /*background: rgb(48,130,13);
+    background: linear-gradient(90deg, rgba(48,130,13,1) 0%, rgba(33,73,4,1) 100%);*/
+    background: rgb(130,97,13);
+    background: linear-gradient(90deg, rgb(119, 85, 18) 0%, rgb(60, 41, 5) 100%);
     border-top: 5px solid #b0f541;
     color: #77fd32;
     font-size: 20px;
@@ -192,6 +194,33 @@ html {
 }
 
 .Login-label {
+    font-size: 26px;
+    color: antiquewhite;
+}
+
+.Events-grid {
+    padding: 20px;
+    display: grid;
+    grid-template-areas: "left right";
+    grid-template-columns: 200px auto;
+    font-family: 'Indie Flower', cursive;
+}
+
+.Events-left {
+    grid-area: left;
+    color: antiquewhite;
+    text-align: center;
+    font-size: 34px;
+}
+
+.Events-right {
+    grid-area: right;
+    color: antiquewhite;
+    text-align: center;
+    font-size: 34px;
+}
+
+.Events-label {
     font-size: 26px;
     color: antiquewhite;
 }

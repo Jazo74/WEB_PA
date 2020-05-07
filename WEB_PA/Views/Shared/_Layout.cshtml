@@ -10,12 +10,13 @@
 </head>
 <body class="Main-body">
     <div class="Main-header">
-        <div class="Nav-title">
-            <a asp-area="" asp-controller="Home" asp-action="Index">ORIENTeering Express</a> @*Change*@
-        </div>
         <div class="Nav-logo">
-            <img class="centerimg" src="~/Images/logo.png" alt="animated question mark">
+            <img class="centerimg" src="~/Images/logo2.png" alt="animated question mark">
         </div>
+        <div class="Nav-title">
+            <a asp-area="" asp-controller="Home" asp-action="Index">Express ORIENTeering</a> @*Change*@
+        </div>
+
         <div class="Nav-login">
             @{
                 if (ViewData["currentUser"] == null || ViewData["currentUser"].Equals(""))

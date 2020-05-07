@@ -3,5 +3,46 @@
     ViewData["Title"] = "Events";
 }
 
-<h1>Events</h1>
+    <div class="Events-grid">
+        <div class="Events-left">
+            <h3 class="center-title">Your existing events</h3>
+            
+
+        </div>
+        <div class="Events-center">
+            <br />
+            <h3 class="center-title" id="Events-center">OR</h3>
+        </div>
+        <div class="Events-right">
+            <h3 class="center-title">Make a new event</h3>
+            <form method="post" asp-controller="Account" asp-action="Register">
+                <label class="Login-label">Event name</label>
+                <br />
+                <input class="input-text" type="text" name="eventName" required autocomplete="off" />
+                <br />
+                <label class="Login-label">Location (GPS coord)</label>
+                <br />
+                <input class="input-text" type="text" name="locCoord" autocomplete="off" />
+                <br />
+                <label class="Login-label">Location address</label>
+                <br />
+                <input class="input-text" type="password" name="locAddress" required autocomplete="off" />
+                <br />
+                <label class="Login-label">Event date/time</label>
+                <br />
+                <input class="input-text" type="datetime" name="eventTime" required autocomplete="off" />
+                <br />
+                <label class="Login-label">Decription</label>
+                <br />
+                <textarea class="input-text-area" name="description" rows="15" cols="80" required autocomplete="off" ></textarea>
+                <br />
+                <label class="Login-label">Event logo link</label>
+                <br />
+                <input class="input-text" type="text" name="logoLink" autocomplete="off" />
+                <br />
+                <br />
+                <input class="button" type="submit" value="Register" />
+            </form>
+        </div>
+    </div>
 
