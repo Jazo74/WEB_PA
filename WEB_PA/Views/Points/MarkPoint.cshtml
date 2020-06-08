@@ -1,0 +1,21 @@
+﻿@model WEB_PA.Models.PointModel
+@section Scripts {
+    <script src="@Url.Content("~/js/markPoint.js")" defer></script>
+}
+<div class="map-grid">
+    <div class="map-header">
+        <form asp-controller="Points" asp-action="SavePoint">
+            <label class="coord-label">Coord X: </label>
+            <input class="coord" id="coord-x" type="text" name="coordX" />
+            <label class="coord-label">Coord Y: </label>
+            <input class="coord" id="coord-y" type="text" name="coordY" />
+            <input class="button" type="submit" value="Save point" />
+            <input type="hidden" name="pointName" value="@Model.PointName" />
+            <input type="hidden" name="pointDescription" value="@Model.PointDescription" />
+            <input type="hidden" name="taskId" value="@Model.TaskId" />
+        </form>
+    </div>
+    <div class="map">
+        <img class="map" id="bigmap" src="@Model.MapLink" alt="map" />
+    </div>
+</div>

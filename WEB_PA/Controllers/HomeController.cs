@@ -14,7 +14,7 @@ namespace WEB_PA.Controllers
 {
     public class HomeController : Controller
     {
-        IDataService ds = new DBService();
+        IDBService ds = new DBService();
 
         public IActionResult Index()
         {

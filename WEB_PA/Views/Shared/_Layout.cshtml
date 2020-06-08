@@ -14,7 +14,7 @@
             <img class="centerimg" src="~/Images/logo2.png" alt="animated question mark">
         </div>
         <div class="Nav-title">
-            <a asp-area="" asp-controller="Home" asp-action="Index">Express ORIENTeering</a> @*Change*@
+            <a asp-area="" asp-controller="Home" asp-action="Index">Express Trekking</a> @*Change*@
         </div>
 
         <div class="Nav-login">
@@ -41,10 +41,6 @@
                     username = "wanderer";
                 }
                 <p class="currentUser">Welcome @username !</p>
-                if (username != "wanderer")
-                {
-                    <a asp-controller="User" asp-action="user">Your activity -></a>
-                }
             }
         </div>
     </div>
@@ -55,7 +51,7 @@
     </div>
     <div class="Main-footer">
         <div>
-            &copy; 2020 - <a class="Backlog-link" asp-controller="Backlog" asp-action="Backlog">Backlog</a> - <a asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+            &copy; 2020 - <a class="Backlog-link" asp-controller="Backlog" asp-action="Backlog">Backlog</a> 
         </div>
     </div>
     @RenderSection("Scripts", required: false)

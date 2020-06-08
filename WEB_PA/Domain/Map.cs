@@ -8,14 +8,24 @@ namespace WEB_PA.Domain
     public class Map
     {
         public int MapId { get; set; }
-        public string MapName { get; set; }
         public string MapLink { get; set; }
+        public string MapName { get; set; }
+        public int EventId { get; set; }
 
-        public Map(string mapName, string MapLink)
+        public Map(string mapLink, int eventId, string mapName)
         {
+            MapLink = mapLink;
             MapName = mapName;
-            MapLink = mapName;
+            EventId = EventId;
         }
 
+        public Map(string mapLink, int eventId, string mapName, int mapId)
+        {
+            MapLink = mapLink;
+            MapName = mapName;
+            EventId = eventId;
+            MapId = mapId;
+        }
+        public Map() { }
     }
 }

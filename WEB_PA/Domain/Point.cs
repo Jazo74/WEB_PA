@@ -8,23 +8,30 @@ namespace WEB_PA.Domain
     {
         public int PointID { get; set; }
         public int TaskID { get; set; }
-        public int CoordX  { get; set; }
-        public int CoordY { get; set; }
+        public float CoordX  { get; set; }
+        public float CoordY { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Mark { get; set; }
         public bool RightPoint { get; set; }
 
-        public Point(int taskID, int coordX, int coordY, string name, string description, string mark, bool rightPoint)
+        public Point(int taskID, float coordX, float coordY, string name, string description, bool rightPoint)
         {
             TaskID = taskID;
             CoordX = coordX;
             CoordY = coordY;
             Name = name;
             Description = description;
-            Mark = mark;
             RightPoint = rightPoint;
-
         }
+
+        public Point(int taskID, float coordX, float coordY, string name, string description)
+        {
+            TaskID = taskID;
+            CoordX = coordX;
+            CoordY = coordY;
+            Name = name;
+            Description = description;
+        }
+
     }
 }

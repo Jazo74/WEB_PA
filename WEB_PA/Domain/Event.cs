@@ -8,30 +8,35 @@ namespace WEB_PA.Domain
     public class Event
     {
         public int EventID { get; set; }
-        public int OwnerID { get; set; }
+        public string OwnerID { get; set; }
         public string Name { get; set; }
-        public string Location { get; set; }
-        public string LocCoord { get; set; }
+        public string Address { get; set; }
+        public string GpsCoord { get; set; }
         public string Description { get; set; }
         public DateTime Time { get; set; }
-        public string LogoLink { get; set; }
-        public int OpenTopicID { get; set; }
-        public int ClosedTopicID { get; set; }
 
-        public Event(int ownerID, string name, string location, 
-                    string locCoord, string descripion, DateTime time, 
-                    string logoLink, int openTopicID, int closedTopicID)
+        public Event(string ownerID, string name, string address, 
+                    string gpsCoord, string descripion, DateTime time)
         {
             OwnerID = ownerID;
             Name = name;
-            Location = location;
-            LocCoord = locCoord;
+            Address = address;
+            GpsCoord = gpsCoord;
             Description = descripion;
             Time = time;
-            LogoLink = logoLink;
-            OpenTopicID = openTopicID;
-            ClosedTopicID = closedTopicID;
-
         }
+
+        public Event(string ownerID, string name, string address,
+                    string gpsCoord, string descripion, DateTime time, int eventId)
+        {
+            EventID = eventId;
+            OwnerID = ownerID;
+            Name = name;
+            Address = address;
+            GpsCoord = gpsCoord;
+            Description = descripion;
+            Time = time;
+        }
+        public Event() { }
     }
 }

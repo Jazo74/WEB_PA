@@ -1,133 +1,83 @@
-﻿DROP TABLE IF EXISTS "question" CASCADE;
-DROP TABLE IF EXISTS "answer" CASCADE;
-DROP TABLE IF EXISTS "question_tag" CASCADE;
-DROP TABLE IF EXISTS "tag" CASCADE;
-DROP TABLE IF EXISTS "komment" CASCADE;
-DROP TABLE IF EXISTS "user" CASCADE;
+﻿DROP TABLE IF EXISTS "events" CASCADE;
+DROP TABLE IF EXISTS "users" CASCADE;
+DROP TABLE IF EXISTS "forum" CASCADE;
+DROP TABLE IF EXISTS "posts" CASCADE;
+DROP TABLE IF EXISTS "maps" CASCADE;
+DROP TABLE IF EXISTS "tasks" CASCADE;
+DROP TABLE IF EXISTS "points" CASCADE;
+DROP TABLE IF EXISTS "events_assists" CASCADE;
+DROP TABLE IF EXISTS "events_participants" CASCADE;
 
-CREATE TABLE "user"(
-	"user_id" varchar(16) Primary Key,
-	email varchar(50) UNIQUE,
-	"password" TEXT,
-	salt TEXT,
-	reputation INT,
-	registration_date TIMESTAMP
+
+CREATE TABLE users(
+	user_id VARCHAR(50) Primary Key,
+	nickname VARCHAR(20),
+	first_name VARCHAR(20),
+	family_name VARCHAR(20),
+	pw TEXT,
+	salt TEXT
 );
 
+CREATE TABLE events(
+	event_id SERIAL PRIMARY KEY,
+	owner_id VARCHAR(50) REFERENCES users(user_id),
+	event_name VARCHAR(50),
+	description TEXT,
+	address VARCHAR(60),
+	gps_coord VARCHAR(30),
+	event_time TIMESTAMP
+);
 
+CREATE TABLE maps (
+	map_id SERIAL PRIMARY KEY,
+	map_name VARCHAR(50),
+	map_link TEXT,
+	event_id INT REFERENCES events(event_id)
+);
 
-CREATE TABLE question(
-	question_id SERIAL PRIMARY KEY,
+CREATE TABLE forum (
+	topic_id SERIAL PRIMARY KEY,
+	event_id INT REFERENCES events(event_id),
+	topic_name VARCHAR(30),
+	topic_type VARCHAR(5),
+	topic_message TEXT
+);
+
+CREATE TABLE posts (
+	post_id SERIAL PRIMARY KEY,
+	topic_id INT REFERENCES forum(topic_id),
+	user_id VARCHAR(50) REFERENCES users(user_id),
 	submission_time TIMESTAMP,
-	view_number INT,
-	vote_number INT,
-	title varchar(50),
-	question_message text,
-	image TEXT,
-	user_id varchar(16),
-	FOREIGN KEY (user_id) references
-	"user"(user_id) ON DELETE SET NULL
-);
-CREATE TABLE answer(
-	answer_id SERIAL PRIMARY KEY,	
-	submission_time TIMESTAMP,
-	vote_number INT,
-	question_id INT,
-	answer_message TEXT,
-	image TEXT,
-	user_id varchar(16),
-	accepted varchar(3) DEFAULT 'no',
-	FOREIGN KEY (user_id) references
-	"user"(user_id) ON DELETE SET NULL,
-	FOREIGN KEY (question_id) references "question"(question_id) ON DELETE SET NULL
-); 
-
-CREATE TABLE tag(
-	tag_id SERIAL PRIMARY KEY,
-	tag_name varchar(40)
+	post VARCHAR(2000),
+	edited BOOLEAN
 );
 
-CREATE TABLE question_tag(
-	question_id INT,
-	tag_id INT,
-	FOREIGN KEY (question_id) references "question"(question_id) ON DELETE SET NULL,
-	FOREIGN KEY (tag_id) references "tag"(tag_id) ON DELETE SET NULL
+CREATE TABLE tasks (
+	task_id SERIAL PRIMARY KEY,
+	serial_number INT,
+	task_name VARCHAR (20),
+	event_id INT REFERENCES events(event_id),
+	task_description VARCHAR(1000),
+	map_id INT REFERENCES maps(map_id)
 );
 
-CREATE TABLE komment(
-	komment_id SERIAL PRIMARY KEY,
-	question_id INT,
-	answer_id INT,
-	komment_message TEXT,
-	submission_time TIMESTAMP,
-	edited_number smallint,
-	user_id varchar(16),
-	FOREIGN KEY (user_id) references
-	"user"(user_id) ON DELETE SET NULL,
-	FOREIGN KEY (question_id) references "question"(question_id) ON DELETE SET NULL,
-	FOREIGN KEY (answer_id) references "answer"(answer_id) ON DELETE SET NULL
+CREATE TABLE points (
+	point_id SERIAL PRIMARY KEY,
+	task_id INT REFERENCES tasks(task_id),
+	coord_x REAL,
+	coord_y REAL,
+	point_name VARCHAR(30),
+	point_desc VARCHAR(300),
+	point_mark TEXT,
+	right_point BOOLEAN
 );
 
---user inserts
+CREATE TABLE events_assists(
+	event_id INT REFERENCES events(event_id),
+	user_id VARCHAR(50) REFERENCES users(user_id)
+);
 
-INSERT INTO "user"(user_id, email, "password", reputation, registration_date)
-VALUES('Erik','erik@mail.com', 'erik', 0, '2020-04-10 4:10:00');
-INSERT INTO "user"(user_id, email, "password", reputation, registration_date)
-VALUES('Zoli', 'zoli@mail.com', 'zoli', 0, '2020-04-10 4:10:00');
-INSERT INTO "user"(user_id, email, "password", reputation, registration_date)
-VALUES('Istvan', 'istvan@mail.com', 'istvan', 0, '2020-04-11 4:11:00');
-INSERT INTO "user"(user_id, email, "password", reputation, registration_date)
-VALUES('Admin', 'admin@mail.com', 'admin', 100, '2020-04-12 4:12:00');
-
---Question inserts
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-30 16:14:26.765429', 0, 0, 'How to peel a banana?', 'Monkeys, what is your technique?', 'https://article.images.consumerreports.org/f_auto/prod/content/dam/CRO%20Images%202018/Health/April/CR-Health-Inlinehero-bananas-good-for-you-0418', 'Erik');
-
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-30 16:10:26.765429', 0, 0, 'Which is the cutest dog?', 'Like, the fluffiest?', 'https://si.wsj.net/public/resources/images/B3-EU419_201908_GR_20190822110317.jpg', 'Erik');
-
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-30 12:14:26.765429', 0, 0, 'Apples or Oranges?', 'Which one is more healthy?', 'https://www.sporcle.com/blog/wp-content/uploads/2017/09/1-4.jpg', 'Istvan');
-
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-29 16:09:26.765429', 0, 0, 'Cats or dogs?', 'Meow or Vau?', 'https://www.theladders.com/wp-content/uploads/dog-cat-190709-1000x563.jpg', 'Zoli');
-
-
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-25 12:14:26.765429', 0, 0, 'The color or the mirror?', 'What is the color of the mirror?', 'https://thumbor-gc.tomandco.uk/unsafe/513x513/center/middle/smart/filters:upscale():fill(white):sharpen(0.5,0.5,true)/https://www.pooky.com/static/media/catalog/product/m/i/mikil100marbra_lifestyle.jpg', 'Erik');
-
-
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-02 12:41:26.765429', 0, 0, 'The resolution of the eye?', 'What Is The Resolution Of The Human Eye?', 'https://cdn.drweil.com/wp-content/uploads/2017/08/blog_health-tips_Want-To-Promote-Healthy-Eyesight-Try-These-5-Supplements_66333475.jpg', 'Istvan');
-
-
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-10 18:14:26.765429', 0, 0, 'Is the sunlight has weight?', 'Does Sunlight Weigh Anything?', 'https://jooinn.com/images/rays-of-sunlight-5.jpg', 'Zoli');
-
-
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-12 12:56:25.765429', 0, 0, 'The center of the Universe?', 'Where Is The Center Of The Universe?', 'https://miro.medium.com/max/2000/1*p4w-LG9eHpZfgI2spkDT9w.jpeg', 'Erik');
-
-
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-23 10:14:26.765429', 0, 0, 'Egg or chicken?', 'Which Came First – The Egg or The Chicken?', 'https://godschild.org/wp-content/uploads/Egg-Laying-Chicken-e1501693493605.jpg', 'Istvan');
-
-
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-25 12:28:26.765429', 0, 0, 'About space guns', 'Can You Fire A Gun In Space?', 'https://i.ytimg.com/vi/am4ALo-iAyk/maxresdefault.jpg', 'Zoli');
-
-
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-27 11:14:26.765429', 0, 0, 'All about money?', 'How Much Money Is There In The World?', 'https://3o15h033zmpwracwx2i00rqx-wpengine.netdna-ssl.com/wp-content/uploads/2015/07/money-shot-balanced-budget-e1446215536794.jpg', 'Erik');
-
-
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-30 12:14:26.765429', 0, 0, 'The weight of the Earth?', 'How Much Is The Earth Worth?', 'https://natgeo.imgix.net/subjects/headers/shutterstock_276228476.jpg?auto=compress,format&w=1920&h=960&fit=crop', 'Istvan');
-
-
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-30 12:14:26.765429', 0, 0, 'Some space question', 'What If The Earth Stopped Rotating?', 'https://i.ytimg.com/vi/tx_pawMRPAY/maxresdefault.jpg', 'Zoli');
-
-
-INSERT INTO question(submission_time, view_number, vote_number, title, question_message, image, user_id)
-VALUES ('2020-03-30 12:14:26.765429', 0, 0, 'About time travelling', 'Is Time Travel Really Possible?', 'https://miro.medium.com/max/4000/1*Er9JmMdTpKj8SgR4txg-Mw.jpeg', 'Admin');
+CREATE TABLE events_participants(
+	event_id INT REFERENCES events(event_id),
+	user_id VARCHAR(50) REFERENCES users(user_id)
+);

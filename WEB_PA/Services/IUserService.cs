@@ -24,5 +24,7 @@ namespace WEB_PA.Domain
 
         void RegisterUser(User user);
 
+        bool UserAlreadyExists(string email);
+
     }
 }

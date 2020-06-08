@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "Events";
+}
+@model WEB_PA.Models.EventModel
+<div class="Event-grid">
+    <div class="Event-left1">
+        <h3 class="center-title">Event information</h3>
+        <div class="event-info">
+            <p><strong>Name:</strong> @Model.EventData.Name - <strong>Date:</strong> @Model.EventData.Time</p>
+            <p><strong>Address:</strong> @Model.EventData.Address - <strong>GPS coords:</strong> @Model.EventData.GpsCoord</p>
+            <p><strong>Description:</strong> @Model.EventData.Description</p>
+        </div>
+    </div>
+    <div class="Event-left2">
+        <h3 class="center-title">Added tasks</h3>
+        <div class="task-list">
+            @{ if (Model.Tasks.Count != 0)
+                {
+                    <table class="Backlog-table">
+                        <thead>
+                            <tr>
+                                <th>Nr.</th>
+                                <th>Task Name</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{foreach (WEB_PA.Domain.Tassk task in Model.Tasks)
+                                {
+                                    <tr>
+                                        <td>@task.SerialNumber</td>
+                                        <td><a asp-controller="Tasks" asp-action="ShowTask" asp-route-tid=@(task.TaskID)>@task.Name</a></td>
+                                        <td><a asp-controller="Tasks" asp-action="DeleteTask" asp-route-tid=@(task.TaskID)>Delete</a></td>
+                                        <td><a asp-controller="Tasks" asp-action="UpdateTask" asp-route-eid=@(task.TaskID)>Update</a></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>There are no events!</p>
+                }
+            }
+        </div>
+    </div>
+    <div class="Event-right1">
+        <h3 class="center-title">Add a new map</h3>
+        <form method="post" asp-controller="Maps" asp-action="AddMap" autocomplete="off">
+            <input class="input-text" type="text" name="mapName" placeholder="map name" autocomplete="off" />
+            <input class="input-text" type="text" name="mapLink" placeholder="map url" autocomplete="off" />
+            <input class="button" type="submit" value="Add map" />
+            <input type="hidden" name="eventId" value="@Model.EventData.EventID" />
+        </form>
+    </div>
+    <div class="Event-right2">
+        <h3 class="center-title">Add a new task</h3>
+        <form method="post" asp-controller="Tasks" asp-action="AddTask" autocomplete="off">
+            <input class="input-text" type="text" name="serialNumber" placeholder="number of task" required autocomplete="off" />
+            <input class="input-text" type="text" name="taskName" placeholder="Name of the task" required autocomplete="off" />
+            <textarea class="input-text-area" name="taskDescription" placeholder="Description of the task" rows="12" required autocomplete="off"></textarea>
+            <input class="input-text" type="text" name="mapNameAndId" list="mapList" placeholder="choose a map" required autocomplete="off" />
+            <datalist id="mapList">
+                @{
+                    foreach (WEB_PA.Domain.Map map in Model.Maps)
+                    {
+                        <option>@map.MapName #@map.MapId</option>
+                    }
+                }
+            </datalist>
+            <input type="hidden" name="eventId" value="@Model.EventData.EventID" />
+            <input class="button" type="submit" value="Add task" />
+        </form>
+    </div>
+</div>
+

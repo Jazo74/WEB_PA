@@ -11,7 +11,7 @@ namespace WEB_PA.Controllers
 {
     public class BacklogController : Controller
     {
-        IDataService ds = new DBService();
+        IDBService ds = new DBService();
         public IActionResult Backlog()
         {
             string currentUser = "";

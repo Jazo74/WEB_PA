@@ -20,7 +20,7 @@ namespace AskMate2.Controllers
     public class AccountController : Controller
     {
         private readonly IUserService userService = new UserHandler();
-        IDataService ds = new DBService();
+        IDBService ds = new DBService();
 
         [HttpGet] 
         public IActionResult Login()
@@ -36,20 +36,13 @@ namespace AskMate2.Controllers
         public async Task<ActionResult> Login([FromForm] string email, [FromForm] string password)
         {
             //List<User> allUsers = userService.GetAllUsers();
-
             string Password = userService.GetPasswordByEmail(email);
-            
             if (Password == null || Password != password)
             {
                 return RedirectToAction("Login", "Account");
             }
-
-
             var claims = new List<Claim> { new Claim(ClaimTypes.Email, email) };
-
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-
             var authProperties = new AuthenticationProperties
             {
                 //AllowRefresh = <bool>,
@@ -78,7 +71,7 @@ namespace AskMate2.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetEvents", "Events");
         }
 
         [HttpGet]
@@ -101,9 +94,7 @@ namespace AskMate2.Controllers
         {
             User user = new User(nickName, email, password, firstName, familyName);
             userService.RegisterUser(user);
-
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

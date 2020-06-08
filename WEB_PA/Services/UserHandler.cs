@@ -14,8 +14,6 @@ namespace WEB_PA.Services
         //Missing available users
         private List<User> users = new List<User>();
 
-        private List<UserTransit> users2 = new List<UserTransit>();
-
 
         // gets all users from the DataBase
 
@@ -37,7 +35,7 @@ namespace WEB_PA.Services
                     while (reader.Read())
                     {
                         nickName = reader["nickname"].ToString();
-                        email = reader["user_email"].ToString();
+                        email = reader["user_id"].ToString();
                         password = reader["pw"].ToString();
                         firstName = reader["first_name"].ToString();
                         familyName = reader["family_name"].ToString();
@@ -80,7 +78,7 @@ namespace WEB_PA.Services
             using (var conn = new NpgsqlConnection(Program.ConnectionString))
             {
                 conn.Open();
-                using (var cmd = new NpgsqlCommand("SELECT pw FROM users WHERE user_email = @email", conn))
+                using (var cmd = new NpgsqlCommand("SELECT pw FROM users WHERE user_id = @email", conn))
                 {
                     List<User> userList = new List<User>();
                     string password = "";
@@ -116,7 +114,7 @@ namespace WEB_PA.Services
             using (var conn = new NpgsqlConnection(Program.ConnectionString))
             {
                 conn.Open();
-                using (var cmd = new NpgsqlCommand("INSERT INTO users (nickname, user_email, pw, first_name, family_name) VALUES(@nickName, @email, @password, @firstName, @familyName)", conn))
+                using (var cmd = new NpgsqlCommand("INSERT INTO users (nickname, user_id, pw, first_name, family_name) VALUES(@nickName, @email, @password, @firstName, @familyName)", conn))
                 {
                     cmd.Parameters.AddWithValue("@nickName", user.NickName);
                     cmd.Parameters.AddWithValue("@email", user.Email);
@@ -126,6 +124,11 @@ namespace WEB_PA.Services
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public bool UserAlreadyExists(string email)
+        {
+            throw new NotImplementedException();
         }
 
         //public List<UserTransit> GetAllUsersModel()

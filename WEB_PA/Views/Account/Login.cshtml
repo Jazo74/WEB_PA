@@ -6,17 +6,12 @@
 <div class="Login-grid">
     <div class="Login-left">
         <h3 class="center-title">Login</h3>
-        <form method="post" asp-controller="Account" asp-action="Login">
-            <label class="Login-label">Email</label>
+        <form method="post" asp-controller="Account" asp-action="Login" autocomplete="off">
+            <input class="input-text" type="text" name="email" placeholder="email" required autocomplete="off"/>
             <br />
-            <input class="input-text" type="text" name="email" required autocomplete="off"/>
+            <input class="input-text" type="password" name="password" placeholder="password" autocomplete="off" />
             <br />
-            <label class="Login-label">Password</label>
-                <br />
-                <input class="input-text" type="password" name="password"  required autocomplete="off" />
-                <br />
-                <br />
-                <input class="button" type="submit" value="Login" />
+            <input class="button" type="submit" value="Login" />
         </form>
         
     </div>
@@ -26,27 +21,16 @@
     </div>
     <div class="Login-right">
         <h3 class="center-title">Register</h3>
-        <form method="post" asp-controller="Account" asp-action="Register">
-            <label class="Login-label">Nick name</label>
+        <form method="post" asp-controller="Account" asp-action="Register" autocomplete="off">
+            <input class="input-text" id="" type="text" name="nickName" placeholder="nickname" required autocomplete="off"/>
             <br />
-            <input class="input-text" type="text" name="nickName" required autocomplete="off"/>
+            <input class="input-text" type="text" name="email" placeholder="email" required autocomplete="off"/>
             <br />
-            <label class="Login-label">Email</label>
+            <input class="input-text" type="password" name="password" placeholder="password" required autocomplete="off"/>
             <br />
-            <input class="input-text" type="text" name="email" required autocomplete="off"/>
+            <input class="input-text" type="text" name="firstName" placeholder="first name" required autocomplete="off" />
             <br />
-            <label class="Login-label">Password</label>
-            <br />
-            <input class="input-text" type="password" name="password" required autocomplete="off"/>
-            <br />
-            <label class="Login-label">First name</label>
-            <br />
-            <input class="input-text" type="text" name="firstName" required autocomplete="off" />
-            <br />
-            <label class="Login-label">Family Name</label>
-            <br />
-            <input class="input-text" type="text" name="familyName" required autocomplete="off"/>
-            <br />
+            <input class="input-text" type="text" name="familyName" placeholder="family name" required autocomplete="off"/>
             <br />
             <input class="button" type="submit" value="Register" />
         </form>

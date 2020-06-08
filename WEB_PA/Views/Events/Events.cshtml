@@ -2,47 +2,56 @@
 @{
     ViewData["Title"] = "Events";
 }
-
-    <div class="Events-grid">
-        <div class="Events-left">
-            <h3 class="center-title">Your existing events</h3>
-            
-
-        </div>
-        <div class="Events-center">
-            <br />
-            <h3 class="center-title" id="Events-center">OR</h3>
-        </div>
-        <div class="Events-right">
-            <h3 class="center-title">Make a new event</h3>
-            <form method="post" asp-controller="Account" asp-action="Register">
-                <label class="Login-label">Event name</label>
-                <br />
-                <input class="input-text" type="text" name="eventName" required autocomplete="off" />
-                <br />
-                <label class="Login-label">Location (GPS coord)</label>
-                <br />
-                <input class="input-text" type="text" name="locCoord" autocomplete="off" />
-                <br />
-                <label class="Login-label">Location address</label>
-                <br />
-                <input class="input-text" type="password" name="locAddress" required autocomplete="off" />
-                <br />
-                <label class="Login-label">Event date/time</label>
-                <br />
-                <input class="input-text" type="datetime" name="eventTime" required autocomplete="off" />
-                <br />
-                <label class="Login-label">Decription</label>
-                <br />
-                <textarea class="input-text-area" name="description" rows="15" cols="80" required autocomplete="off" ></textarea>
-                <br />
-                <label class="Login-label">Event logo link</label>
-                <br />
-                <input class="input-text" type="text" name="logoLink" autocomplete="off" />
-                <br />
-                <br />
-                <input class="button" type="submit" value="Register" />
-            </form>
-        </div>
+@model WEB_PA.Models.EventsModel
+<div class="Events-grid">
+    <div class="Events-left">
+        <h3 class="center-title">Your existing events</h3>
+        @{ if (Model.Events.Count != 0)
+            {
+                <table class="Backlog-table">
+                    <thead>
+                        <tr>
+                            <th>Event Name</th>
+                            <th>Time</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{foreach (WEB_PA.Domain.Event ev in Model.Events)
+                        {
+                            <tr>
+                                <td><a asp-controller="Events" asp-action="ShowEvent" asp-route-eid=@(ev.EventID)>@ev.Name</a></td>
+                                <td>@ev.Time</td>
+                                <td><a asp-controller="Events" asp-action="DeleteEvent" asp-route-eid=@(ev.EventID)>Delete</a></td>
+                                <td><a asp-controller="Events" asp-action="UpdateEvent" asp-route-eid=@(ev.EventID)>Update</a></td>
+                            </tr>
+                        }
+                        }
+                    </tbody>
+                    
+                </table>
+            }
+            else
+            {
+                <p>There are no events!</p>
+            }
+        }
     </div>
+    <div class="Events-center">
+
+    </div>
+    <div class="Events-right">
+        <h3 class="center-title">Make a new event</h3>
+        <form method="post" asp-controller="Events" asp-action="AddEvent" autocomplete="off">
+            <input class="input-text" type="text" name="eventName" placeholder="Name of the event" required autocomplete="off" />
+            <textarea class="input-text-area" name="description" placeholder="Description of the event" rows="18" required autocomplete="off"></textarea>
+            <input class="input-text" type="text" name="address" placeholder="Location Address" required autocomplete="off" />
+            <input class="input-text" type="text" name="gpsCoord" placeholder="GPS coordinate" autocomplete="off" />
+            <input class="input-date" type="date" name="date" required autocomplete="off" />
+            <input class="input-time" type="time" name="time" required autocomplete="off" />
+            <input class="button" type="submit" value="Add event" />
+        </form>
+    </div>
+</div>
 
