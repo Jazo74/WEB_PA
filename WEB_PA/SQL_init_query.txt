@@ -7,7 +7,9 @@ DROP TABLE IF EXISTS "tasks" CASCADE;
 DROP TABLE IF EXISTS "points" CASCADE;
 DROP TABLE IF EXISTS "events_assists" CASCADE;
 DROP TABLE IF EXISTS "events_participants" CASCADE;
-
+DROP TABLE IF EXISTS "sidedoors" CASCADE;
+DROP TRIGGER IF EXISTS sidedoor_making ON events CASCADE;
+DROP FUNCTION IF EXISTS sidedoor_making;
 
 CREATE TABLE users(
 	user_id VARCHAR(50) Primary Key,
@@ -20,7 +22,7 @@ CREATE TABLE users(
 
 CREATE TABLE events(
 	event_id SERIAL PRIMARY KEY,
-	owner_id VARCHAR(50) REFERENCES users(user_id),
+	owner_id VARCHAR(50) REFERENCES users(user_id) ON DELETE SET NULL,
 	event_name VARCHAR(50),
 	description TEXT,
 	address VARCHAR(60),
@@ -28,16 +30,21 @@ CREATE TABLE events(
 	event_time TIMESTAMP
 );
 
+CREATE TABLE sidedoors (
+	sidedoor_id VARCHAR(100),
+	event_id INT REFERENCES events(event_id)
+);
+
 CREATE TABLE maps (
 	map_id SERIAL PRIMARY KEY,
 	map_name VARCHAR(50),
 	map_link TEXT,
-	event_id INT REFERENCES events(event_id)
+	event_id INT REFERENCES events(event_id) ON DELETE CASCADE
 );
 
 CREATE TABLE forum (
 	topic_id SERIAL PRIMARY KEY,
-	event_id INT REFERENCES events(event_id),
+	event_id INT REFERENCES events(event_id) ON DELETE CASCADE,
 	topic_name VARCHAR(30),
 	topic_type VARCHAR(5),
 	topic_message TEXT
@@ -45,7 +52,7 @@ CREATE TABLE forum (
 
 CREATE TABLE posts (
 	post_id SERIAL PRIMARY KEY,
-	topic_id INT REFERENCES forum(topic_id),
+	topic_id INT REFERENCES forum(topic_id) ON DELETE CASCADE,
 	user_id VARCHAR(50) REFERENCES users(user_id),
 	submission_time TIMESTAMP,
 	post VARCHAR(2000),
@@ -56,14 +63,14 @@ CREATE TABLE tasks (
 	task_id SERIAL PRIMARY KEY,
 	serial_number INT,
 	task_name VARCHAR (20),
-	event_id INT REFERENCES events(event_id),
+	event_id INT REFERENCES events(event_id) ON DELETE CASCADE,
 	task_description VARCHAR(1000),
 	map_id INT REFERENCES maps(map_id)
 );
 
 CREATE TABLE points (
 	point_id SERIAL PRIMARY KEY,
-	task_id INT REFERENCES tasks(task_id),
+	task_id INT REFERENCES tasks(task_id) ON DELETE CASCADE,
 	coord_x REAL,
 	coord_y REAL,
 	point_name VARCHAR(30),
@@ -73,11 +80,43 @@ CREATE TABLE points (
 );
 
 CREATE TABLE events_assists(
-	event_id INT REFERENCES events(event_id),
+	event_id INT REFERENCES events(event_id) ON DELETE CASCADE,
 	user_id VARCHAR(50) REFERENCES users(user_id)
 );
 
 CREATE TABLE events_participants(
-	event_id INT REFERENCES events(event_id),
+	event_id INT REFERENCES events(event_id) ON DELETE CASCADE,
 	user_id VARCHAR(50) REFERENCES users(user_id)
 );
+
+/* TRIGGERED FUNCTION insert a side door code for every event */
+CREATE FUNCTION sidedoor_making() RETURNS trigger AS 
+$sidedoor_making$
+	DECLARE
+	counter INTEGER;
+	eventID INTEGER;
+	sideID VARCHAR(100);
+	sampleString TEXT;
+	index INTEGER;
+	BEGIN
+		eventID := NEW.event_id;
+		sideID := 'x';
+		sampleString := 'abcdefghijklmnopqrstvzyw1234567890';
+		counter := 0;
+		index := 0;
+		LOOP
+			EXIT WHEN counter = 100;
+			index := floor(random()*(33-0+1))+0;
+			sideID := concat(sideID, substring(sampleString,index,1));
+			counter := counter + 1;
+		END LOOP;
+		INSERT INTO sidedoors (event_id, sidedoor_id) VALUES (eventID, sideID);
+		RETURN NEW;
+	END;
+$sidedoor_making$ LANGUAGE plpgsql;
+
+/* TRIGGER when an insert happens in the events table */
+CREATE TRIGGER sidedoor_making 
+AFTER INSERT
+ON events
+FOR EACH ROW EXECUTE FUNCTION sidedoor_making();

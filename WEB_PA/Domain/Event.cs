@@ -16,25 +16,25 @@ namespace WEB_PA.Domain
         public DateTime Time { get; set; }
 
         public Event(string ownerID, string name, string address, 
-                    string gpsCoord, string descripion, DateTime time)
+                    string gpsCoord, string description, DateTime time)
         {
             OwnerID = ownerID;
             Name = name;
             Address = address;
             GpsCoord = gpsCoord;
-            Description = descripion;
+            Description = description;
             Time = time;
         }
 
         public Event(string ownerID, string name, string address,
-                    string gpsCoord, string descripion, DateTime time, int eventId)
+                    string gpsCoord, string description, DateTime time, int eventId)
         {
             EventID = eventId;
             OwnerID = ownerID;
             Name = name;
             Address = address;
             GpsCoord = gpsCoord;
-            Description = descripion;
+            Description = description;
             Time = time;
         }
         public Event() { }

@@ -1,0 +1,30 @@
+﻿@model WEB_PA.Models.TaskModel
+
+<div class="outer-ring">
+    <form method="post" asp-controller="Tasks" asp-action="SaveTask">
+        <label class="input-labels">Nr.: </label><input class="input-text" type="number" min="1" max="100" name="serialNumber" value="@Model.TaskData.SerialNumber" required autocomplete="off" />
+        <br />
+        <br />
+        <label class="input-labels">Task name: </label><input class="input-text" type="text" name="taskName" maxlength="50" value="@Model.TaskData.Name" required autocomplete="off" />
+        <br />
+        <br />
+        <label class="input-labels">Description: </label>
+        <br />
+        <br />
+        <textarea class="text-area" name="taskDescription" rows="15" autocomplete="off">@Model.TaskData.Description</textarea>
+        <br />
+        <br />
+        <input class="input-text" type="text" name="mapNameAndId" list="mapList" required autocomplete="off" />
+        <datalist id="mapList">
+            @{
+                foreach (WEB_PA.Domain.Map map in Model.MapsData)
+                {
+                    <option>@map.MapName #@map.MapId</option>
+                }
+            }
+        </datalist>
+        <input type="hidden" name="eid" value="@Model.TaskData.EventID" />
+        <input type="hidden" name="taskId" value="@Model.TaskData.TaskID" />
+        <input class="button" type="submit" value="Update event" />
+    </form>
+</div>

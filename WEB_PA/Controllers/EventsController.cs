@@ -49,5 +49,42 @@ namespace WEB_PA.Controllers
             EventModel eventModel = new EventModel(ds.GetEvent(eid), ds.GetTasksByEvent(eid), ds.GetMapsByEventId(eid), currentUser);
             return View("Event", eventModel);
         }
+
+        [Authorize]
+        [HttpGet]
+        [Microsoft.AspNetCore.Mvc.Route("/Events/DeleteEvent/{eid}")]
+        public IActionResult DeleteEvent(int eid)
+        {
+            string userID = HttpContext.User.FindFirstValue(ClaimTypes.Email);
+            string currentUser = ds.GetNickname(userID);
+            ViewData.Add("currentUser", currentUser);
+            ds.DeleteEvent(eid);
+            EventsModel events = new EventsModel(ds.GetEventsByUser(userID), currentUser);
+            return View("Events", events);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Microsoft.AspNetCore.Mvc.Route("/Events/UpdateEvent/{eid}")]
+        public IActionResult UpdateEvent(int eid)
+        {
+            string userID = HttpContext.User.FindFirstValue(ClaimTypes.Email);
+            string currentUser = ds.GetNickname(userID);
+            ViewData.Add("currentUser", currentUser);
+            EventModel eventModel = new EventModel(ds.GetEvent(eid), ds.GetTasksByEvent(eid), ds.GetMapsByEventId(eid), currentUser);
+            return View("UpdateEvent", eventModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult SaveEvent([FromForm] int eventId, [FromForm] string eventName, [FromForm] string description, [FromForm] string address, [FromForm] string gpsCoord, [FromForm] string date, [FromForm] string time)
+        {
+            string userID = HttpContext.User.FindFirstValue(ClaimTypes.Email);
+            string currentUser = ds.GetNickname(userID);
+            ViewData.Add("currentUser", currentUser);
+            string datetime = date + " " + time;
+            ds.UpdateEvent(eventId, eventName, address, gpsCoord, description, Convert.ToDateTime(datetime));
+            return RedirectToAction("GetEvents", "Events");
+        }
     }
 }

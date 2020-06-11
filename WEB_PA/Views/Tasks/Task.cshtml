@@ -1,9 +1,5 @@
 ﻿@model WEB_PA.Models.TaskModel
 
-@section Scripts {
-
-    <script src="@Url.Content("~/js/miniMap.js")" defer></script>
-}
 <div class="Task-grid">
     <div class="Task-left1">
         <h3 class="center-title">Task information</h3>
@@ -31,7 +27,7 @@
                                     <tr>
                                         <td>@point.Name</td>
                                         @*<td>@point.RightPoint</td>*@
-                                        <td><a asp-controller="Points" asp-action="DeletePoint" asp-route-pid=@(point.PointID)>Delete</a></td>
+                                        <td><a asp-controller="Points" asp-action="DeletePoint" asp-route-pid=@(point.PointID) asp-route-tid=@(Model.TaskData.TaskID)>Delete</a></td>
                                     </tr>
                                 }
                             }
@@ -49,8 +45,8 @@
     <div class="Task-right1">
         <h3 class="center-title">Add a new point</h3>
         <form method="post" asp-controller="Points" asp-action="MarkPoint" autocomplete="off">
-            <input class="input-text" type="text" name="pointName" placeholder="point name" required autocomplete="off" />
-            <input class="input-text" type="text" name="pointDescription" placeholder="description" required autocomplete="off" />
+            <input class="input-text" type="text" maxlength="30" name="pointName" placeholder="point name" required autocomplete="off" />
+            <input class="input-text" type="text" maxlength="300"name="pointDescription" placeholder="description" required autocomplete="off" />
             <input class="button" type="submit" value="Next" />
             <input type="hidden" name="taskId" value="@Model.TaskData.TaskID" />
             <input type="hidden" name="mapLink" value="@Model.MapData.MapLink" />
@@ -59,9 +55,39 @@
     </div>
     <div class="Task-right2">
         <img class="minimap" id="minimap" src="@Model.MapData.MapLink" alt="minimap" />
-        <div id="myCanvas"></div>
+        <canvas id="myCanvas"></canvas>
     </div>
 </div>
+<script type="text/javascript">
+    const coordXs = [];
+    const coordYs = [];
+    @foreach(WEB_PA.Domain.Point point in @Model.PointsData)
+    {
+        @:coordXs.push("@point.CoordX.ToString().Replace(",", ".")");
+        @:coordYs.push("@point.CoordY.ToString().Replace(",", ".")");
+    }
+    const miniMapEl = document.querySelector("#minimap");
+    const canvasEl = document.querySelector("#myCanvas");
+    miniMapEl.addEventListener("load", Draw);
+    function Draw() {
+        canvasEl.style.position = "absolute";
+        canvasEl.style.left = miniMapEl.offsetLeft + "px";
+        canvasEl.style.width = miniMapEl.clientWidth + "px";
+        canvasEl.width = miniMapEl.clientWidth;
+        canvasEl.style.top = miniMapEl.offsetTop + "px";
+        canvasEl.style.height = miniMapEl.clientHeight + "px"; 
+        canvasEl.height = miniMapEl.clientHeight;
+        const ctx = canvasEl.getContext("2d");
+        for (i = 0; i < coordXs.length; i++) {
+            const coordX = Math.ceil(coordXs[i] / 100 * miniMapEl.clientWidth);
+            const coordY = Math.ceil(coordYs[i] / 100 * miniMapEl.clientHeight);
+            ctx.beginPath();
+            ctx.arc(coordX, coordY, 10, 0, 2 * Math.PI);
+            ctx.fillStyle = "#fffe00";
+            ctx.fill();
+        }
+    }
+</script>
 
 
     

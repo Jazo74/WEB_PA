@@ -14,14 +14,14 @@ namespace WEB_PA.Domain
         public string Description { get; set; }
         public bool RightPoint { get; set; }
 
-        public Point(int taskID, float coordX, float coordY, string name, string description, bool rightPoint)
+        public Point(int taskID, float coordX, float coordY, string name, string description, int pointID)
         {
             TaskID = taskID;
             CoordX = coordX;
             CoordY = coordY;
             Name = name;
             Description = description;
-            RightPoint = rightPoint;
+            PointID = pointID;
         }
 
         public Point(int taskID, float coordX, float coordY, string name, string description)

@@ -32,8 +32,8 @@
                                     <tr>
                                         <td>@task.SerialNumber</td>
                                         <td><a asp-controller="Tasks" asp-action="ShowTask" asp-route-tid=@(task.TaskID)>@task.Name</a></td>
-                                        <td><a asp-controller="Tasks" asp-action="DeleteTask" asp-route-tid=@(task.TaskID)>Delete</a></td>
-                                        <td><a asp-controller="Tasks" asp-action="UpdateTask" asp-route-eid=@(task.TaskID)>Update</a></td>
+                                        <td><a asp-controller="Tasks" asp-action="DeleteTask" asp-route-tid=@(task.TaskID) asp-route-eid=@(Model.EventData.EventID)>Delete</a></td>
+                                        <td><a asp-controller="Tasks" asp-action="UpdateTask" asp-route-tid=@(task.TaskID) asp-route-eid=@(Model.EventData.EventID) asp-route-mid=@(task.MapID)>Update</a></td>
                                     </tr>
                                 }
                             }
@@ -50,7 +50,7 @@
     <div class="Event-right1">
         <h3 class="center-title">Add a new map</h3>
         <form method="post" asp-controller="Maps" asp-action="AddMap" autocomplete="off">
-            <input class="input-text" type="text" name="mapName" placeholder="map name" autocomplete="off" />
+            <input class="input-text" type="text" name="mapName" maxlength="50" placeholder="map name" autocomplete="off" />
             <input class="input-text" type="text" name="mapLink" placeholder="map url" autocomplete="off" />
             <input class="button" type="submit" value="Add map" />
             <input type="hidden" name="eventId" value="@Model.EventData.EventID" />
@@ -59,8 +59,8 @@
     <div class="Event-right2">
         <h3 class="center-title">Add a new task</h3>
         <form method="post" asp-controller="Tasks" asp-action="AddTask" autocomplete="off">
-            <input class="input-text" type="text" name="serialNumber" placeholder="number of task" required autocomplete="off" />
-            <input class="input-text" type="text" name="taskName" placeholder="Name of the task" required autocomplete="off" />
+            <input class="input-number" type="number" name="serialNumber" min="1" max="100" placeholder="Nr." required autocomplete="off" />
+            <input class="input-text" type="text" name="taskName" maxlength="20" placeholder="Name of the task" required autocomplete="off" />
             <textarea class="input-text-area" name="taskDescription" placeholder="Description of the task" rows="12" required autocomplete="off"></textarea>
             <input class="input-text" type="text" name="mapNameAndId" list="mapList" placeholder="choose a map" required autocomplete="off" />
             <datalist id="mapList">

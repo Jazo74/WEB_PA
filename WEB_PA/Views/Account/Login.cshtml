@@ -7,7 +7,7 @@
     <div class="Login-left">
         <h3 class="center-title">Login</h3>
         <form method="post" asp-controller="Account" asp-action="Login" autocomplete="off">
-            <input class="input-text" type="text" name="email" placeholder="email" required autocomplete="off"/>
+            <input class="input-text" type="email" name="email" placeholder="email" maxlength="50" required autocomplete="off"/>
             <br />
             <input class="input-text" type="password" name="password" placeholder="password" autocomplete="off" />
             <br />
@@ -22,15 +22,15 @@
     <div class="Login-right">
         <h3 class="center-title">Register</h3>
         <form method="post" asp-controller="Account" asp-action="Register" autocomplete="off">
-            <input class="input-text" id="" type="text" name="nickName" placeholder="nickname" required autocomplete="off"/>
+            <input class="input-text" id="" type="text" name="nickName" maxlength="20" placeholder="nickname" required autocomplete="off"/>
             <br />
-            <input class="input-text" type="text" name="email" placeholder="email" required autocomplete="off"/>
+            <input class="input-text" type="email" name="email" placeholder="email" maxlength="50" required autocomplete="off"/>
             <br />
             <input class="input-text" type="password" name="password" placeholder="password" required autocomplete="off"/>
             <br />
-            <input class="input-text" type="text" name="firstName" placeholder="first name" required autocomplete="off" />
+            <input class="input-text" type="text" name="firstName" maxlength="20" placeholder="first name" required autocomplete="off" />
             <br />
-            <input class="input-text" type="text" name="familyName" placeholder="family name" required autocomplete="off"/>
+            <input class="input-text" type="text" name="familyName" maxlength="20" placeholder="family name" required autocomplete="off"/>
             <br />
             <input class="button" type="submit" value="Register" />
         </form>

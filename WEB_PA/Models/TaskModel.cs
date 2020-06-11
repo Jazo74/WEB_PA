@@ -11,6 +11,7 @@ namespace WEB_PA.Models
         public string CurrentUser;
         public Tassk TaskData;
         public Map MapData;
+        public List<Map> MapsData;
         public List<Point> PointsData;
                        
         public TaskModel(Tassk taskData, Map mapData, List<Point> pointsData, string currentUser)
@@ -19,6 +20,15 @@ namespace WEB_PA.Models
             MapData = mapData;
             PointsData = pointsData;
             CurrentUser = currentUser;
+        }
+
+        public TaskModel(Tassk taskData, Map mapData, List<Point> pointsData, string currentUser, List<Map> mapsData)
+        {
+            TaskData = taskData;
+            MapData = mapData;
+            PointsData = pointsData;
+            CurrentUser = currentUser;
+            MapsData = mapsData;
         }
     }
     

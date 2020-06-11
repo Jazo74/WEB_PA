@@ -29,7 +29,7 @@ namespace WEB_PA.Controllers
 
         [Authorize]
         [HttpGet]
-        [Microsoft.AspNetCore.Mvc.Route("/Tasks/ShowPoint/{tid}")]
+        [Microsoft.AspNetCore.Mvc.Route("/Points/ShowPoint/{tid}")]
         public IActionResult ShowPoint(int tid)
         {
             string userID = HttpContext.User.FindFirstValue(ClaimTypes.Email);
@@ -52,6 +52,20 @@ namespace WEB_PA.Controllers
 
             ds.AddPoint(taskId, X, Y, pointName, pointDescription);
             return RedirectToAction("ShowTask", "Tasks", new { @tid = taskId });
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Microsoft.AspNetCore.Mvc.Route("/Points/DeletePoint/{pid}&{tid}")]
+        public IActionResult DeletePoint(int pid, int tid)
+        {
+            string userID = HttpContext.User.FindFirstValue(ClaimTypes.Email);
+            string currentUser = ds.GetNickname(userID);
+            ViewData.Add("currentUser", currentUser);
+            ds.DeletePoint(pid);
+            Tassk task = ds.GetTask(tid);
+            TaskModel taskModel = new TaskModel(task, ds.getMap(task.MapID), ds.GetPointsByTaskId(tid), currentUser);
+            return RedirectToAction("ShowTask", "Tasks", new { @tid = tid });
         }
     }
 }

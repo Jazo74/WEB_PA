@@ -7,6 +7,17 @@ p {
     margin-bottom: 5px;
 }
 
+canvas, img {
+    image-rendering: optimizeSpeed; /* Legal fallback */
+    image-rendering: -moz-crisp-edges; /* Firefox        */
+    image-rendering: -o-crisp-edges; /* Opera          */
+    image-rendering: -webkit-optimize-contrast; /* Safari         */
+    image-rendering: optimize-contrast; /* CSS3 Proposed  */
+    image-rendering: crisp-edges; /* CSS4 Proposed  */
+    image-rendering: pixelated; /* CSS4 Proposed  */
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
 hr {
     width: 90%;
     border: 1px solid #2d6312 !important;
@@ -371,7 +382,18 @@ html {
     margin-bottom: 0px;
     padding: 5px;
     font-size: 18px;
-    width: 400px;
+    width: 300px;
+    border: 1px solid #2d6312;
+    border-radius: 10px;
+}
+
+.input-number {
+    background-color: #eaf3d9;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 5px;
+    font-size: 18px;
+    width: 100px;
     border: 1px solid #2d6312;
     border-radius: 10px;
 }
@@ -516,4 +538,28 @@ html {
     width: 70px;
     border-radius: 10px;
     margin-right: 20px;
+}
+
+.outer-ring {
+    padding: 50px;
+    margin: 50px;
+    background-color: #7ba565;
+    border-radius: 20px;
+}
+
+.input-labels {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0f2d00;
+}
+
+.text-area {
+    width: 80%;
+    font-size: 18px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 5px;
+    background-color: #eaf3d9;
+    border: 1px solid #2d6312;
+    border-radius: 10px;
 }

@@ -27,11 +27,12 @@ namespace WEB_PA
             services.AddControllersWithViews();
             //services.AddSingleton(typeof(IUserService), //ADD user to database?);
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-                    //.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-                    //{ options.LoginPath = "/Account/Index";
-                    //    options.LogoutPath = "/Account/Logout";
-                    //}
-                       // );
+            //.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+            //{ options.LoginPath = "/Account/Index";
+            //    options.LogoutPath = "/Account/Logout";
+            //}
+            // );
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +57,12 @@ namespace WEB_PA
 
             app.UseAuthorization();
 
-           
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
+
 
             app.UseEndpoints(endpoints =>
             {

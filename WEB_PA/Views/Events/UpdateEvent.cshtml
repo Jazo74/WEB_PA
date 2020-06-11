@@ -1,0 +1,25 @@
+﻿@model WEB_PA.Models.EventModel
+
+<div class="outer-ring">
+    <form method="post" asp-controller="Events" asp-action="SaveEvent">
+        <label class="input-labels">Event name: </label><input class="input-text" type="text" name="eventName" maxlength="50" value="@Model.EventData.Name" required autocomplete="off" />
+        <br />
+        <label class="input-labels">Description: </label>
+        <br />
+        <br />
+        <textarea class="text-area" name="description" rows="15" autocomplete="off">@Model.EventData.Description</textarea>
+        <br />
+        <br />
+        <label class="input-labels">Address</label>
+        <input class="input-text" type="text" name="address" maxlength="60" value="@Model.EventData.Address" required autocomplete="off" />
+        <label class="input-labels"> GPS coord</label>
+        <input class="input-text" type="text" name="gpsCoord" maxlength="30" value="@Model.EventData.GpsCoord" autocomplete="off" />
+        <br />
+        <br />
+        <label class="input-labels">Date: </label><input class="input-date" type="date" name="date" value="@Model.EventData.Time.ToString().Substring(0,12).Replace(". ","-")" required autocomplete="off" />
+        <label class="input-labels"> Time: </label><input class="input-time" type="time" name="time" value="@Model.EventData.Time.ToString().Substring(14)" required autocomplete="off" />
+        <br />
+        <input type="hidden" name="eventId" value="@Model.EventData.EventID" />
+        <input class="button" type="submit" value="Update event" />
+    </form>
+</div>

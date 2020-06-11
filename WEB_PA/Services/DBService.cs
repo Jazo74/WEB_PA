@@ -288,36 +288,36 @@ namespace WEB_PA.Domain
                         string pointName = reader["point_name"].ToString();
                         string pointDescription = reader["point_desc"].ToString();
                         //bool rightPoint = (bool)reader["right_point"];
-                        points.Add(new Point(taskID, coordX, coordY, pointName, pointDescription));
+                        points.Add(new Point(taskID, coordX, coordY, pointName, pointDescription, pointID));
                     }
                     return points;
                 }
             }
         }
 
-        public Map getMapByTaskId(int taskId)
-        {
-            using (var conn = new NpgsqlConnection(Program.ConnectionString))
-            {
-                Map map = new Map();
-                conn.Open();
-                using (var cmd = new NpgsqlCommand("SELECT * FROM maps " +
-                    "WHERE task_id = @taskId", conn))
-                {
-                    cmd.Parameters.AddWithValue("taskId", taskId);
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        int mapID = (int)reader["map_id"];
-                        int eventID = (int)reader["event_id"];
-                        string mapLink = reader["map_link"].ToString();
-                        string mapName = reader["map_name"].ToString();
-                        map = new Map(mapLink, eventID, mapName, mapID);
-                    }
-                    return map;
-                }
-            }
-        }
+        //public Map getMapByTaskId(int taskId)
+        //{
+        //    using (var conn = new NpgsqlConnection(Program.ConnectionString))
+        //    {
+        //        Map map = new Map();
+        //        conn.Open();
+        //        using (var cmd = new NpgsqlCommand("SELECT * FROM maps " +
+        //            "WHERE map_id = @map_id", conn))
+        //        {
+        //            cmd.Parameters.AddWithValue("taskId", taskId);
+        //            var reader = cmd.ExecuteReader();
+        //            while (reader.Read())
+        //            {
+        //                int mapID = (int)reader["map_id"];
+        //                int eventID = (int)reader["event_id"];
+        //                string mapLink = reader["map_link"].ToString();
+        //                string mapName = reader["map_name"].ToString();
+        //                map = new Map(mapLink, eventID, mapName, mapID);
+        //            }
+        //            return map;
+        //        }
+        //    }
+        //}
 
         public void AddPoint(int taskId, float coordX, float coordY, string pointName, string pointDescription)
         {
@@ -333,6 +333,87 @@ namespace WEB_PA.Domain
                     cmd.Parameters.AddWithValue("coordY", coordY);
                     cmd.Parameters.AddWithValue("pointName", pointName);
                     cmd.Parameters.AddWithValue("pointDescription", pointDescription);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteEvent(int eventId)
+        {
+            using (var conn = new NpgsqlConnection(Program.ConnectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand(
+                 "DELETE FROM events WHERE event_id = @eventId", conn))
+                {
+                    cmd.Parameters.AddWithValue("eventId", eventId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteTask(int taskId)
+        {
+            using (var conn = new NpgsqlConnection(Program.ConnectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand(
+                 "DELETE FROM tasks WHERE task_id = @taskId", conn))
+                {
+                    cmd.Parameters.AddWithValue("taskId", taskId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeletePoint(int pointId)
+        {
+            using (var conn = new NpgsqlConnection(Program.ConnectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand(
+                 "DELETE FROM points WHERE point_id = @pointId", conn))
+                {
+                    cmd.Parameters.AddWithValue("pointId", pointId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdateEvent(int eventId, string name, string address, string gpsCoord, string description, DateTime time)
+        {
+            using (var conn = new NpgsqlConnection(Program.ConnectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand(
+                 "UPDATE events SET event_name = @eventName, description = @description, address = @address" +
+                 ", gps_coord = @gpsCoord, event_time = @time WHERE event_id = @eventId", conn))
+                {
+                    cmd.Parameters.AddWithValue("eventId", eventId);
+                    cmd.Parameters.AddWithValue("eventName", name);
+                    cmd.Parameters.AddWithValue("description", description);
+                    cmd.Parameters.AddWithValue("address", address);
+                    cmd.Parameters.AddWithValue("gpsCoord", gpsCoord);
+                    cmd.Parameters.AddWithValue("time", time);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdateTask(int taskId, int serialNumber, string name, string description, int mapID)
+        {
+            using (var conn = new NpgsqlConnection(Program.ConnectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand(
+                 "UPDATE tasks SET task_name = @taskName, task_description = @taskDescription, serial_number = @serialNumber, map_id = @mapId" +
+                 " WHERE task_id = @taskId", conn))
+                {
+                    cmd.Parameters.AddWithValue("taskId", taskId);
+                    cmd.Parameters.AddWithValue("taskName", name);
+                    cmd.Parameters.AddWithValue("taskDescription", description);
+                    cmd.Parameters.AddWithValue("serialNumber", serialNumber);
+                    cmd.Parameters.AddWithValue("mapId", mapID);
                     cmd.ExecuteNonQuery();
                 }
             }

@@ -44,10 +44,10 @@
     <div class="Events-right">
         <h3 class="center-title">Make a new event</h3>
         <form method="post" asp-controller="Events" asp-action="AddEvent" autocomplete="off">
-            <input class="input-text" type="text" name="eventName" placeholder="Name of the event" required autocomplete="off" />
+            <input class="input-text" type="text" name="eventName" maxlength="50" placeholder="Name of the event" required autocomplete="off" />
             <textarea class="input-text-area" name="description" placeholder="Description of the event" rows="18" required autocomplete="off"></textarea>
-            <input class="input-text" type="text" name="address" placeholder="Location Address" required autocomplete="off" />
-            <input class="input-text" type="text" name="gpsCoord" placeholder="GPS coordinate" autocomplete="off" />
+            <input class="input-text" type="text" name="address" maxlength="60" placeholder="Location Address" required autocomplete="off" />
+            <input class="input-text" type="text" name="gpsCoord" maxlength="30" placeholder="GPS coordinate" autocomplete="off" />
             <input class="input-date" type="date" name="date" required autocomplete="off" />
             <input class="input-time" type="time" name="time" required autocomplete="off" />
             <input class="button" type="submit" value="Add event" />
